@@ -18,6 +18,15 @@ const ChatHome = () => {
         setCurrentData(allChats[index])
     }
 
+    const onLastMassageByParent = (data: any) => {
+        setLastMassage((prevState: any) => {
+            const updateState = {...prevState}
+            updateState.push(data)
+
+            return updateState
+        })
+    }
+
     useEffect(() => {
         async function fetching() {
             const data = await checkAuth().then((result) => {
@@ -124,7 +133,7 @@ const ChatHome = () => {
                             <>
                                 {noUser ? (
                                     allChats.map((value: any, index: any) => (
-                                       <UserPanel key={index} onClick={() => getChatData(index)} avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={value.user} lastActive='Yesterday' viewStatus={true} lastMassage={lastMassage[index] ? lastMassage[index] : 'No messages yet'} />
+                                       <UserPanel key={index} onClick={() => getChatData(index)} onLastMassage={onLastMassageByParent} avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={value.user} lastActive='Yesterday' viewStatus={true} lastMassage={lastMassage[index] ? lastMassage[index] : 'No messages yet'} />
                                     ))
                                 ) : (
                                     <div className="flex flex-col justify-center">

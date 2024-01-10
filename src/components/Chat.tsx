@@ -33,7 +33,9 @@ const Chat = (props: any) => {
 
 
 
+
     useEffect(() => {
+      props.onLastMassage(inputValue)
         if(scrollableDivRef.current){
             scrollableDivRef.current.scrollTo({
                 top: scrollableDivRef.current.scrollHeight,
@@ -62,8 +64,6 @@ const Chat = (props: any) => {
         fetching()
     }, [props.data.privateId])
 
-    useEffect(() => {
-    })
 
     useEffect(() => {
         socket.emit('join', props.data.privateId)

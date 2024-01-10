@@ -63,7 +63,7 @@ const ChatHome = () => {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "<origin>"
                 },
-                body: JSON.stringify(localStorage.getItem('refreshToken'))
+                body: JSON.stringify({refreshToken: localStorage.getItem('refreshToken')})
             })
             const data = response.json()
             data.then((result) => {

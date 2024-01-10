@@ -64,8 +64,10 @@ const Chat = (props: any) => {
     }, [props.data.privateId])
 
     useEffect(() => {
-      const dataChat = massages[massages.length - 1].data
-      console.log(dataChat[dataChat.length - 1].body)
+      if(massages.length > 0){
+        const dataChat = massages[massages.length - 1].data
+        console.log(dataChat[dataChat.length - 1].body)
+      }
     })
 
     useEffect(() => {

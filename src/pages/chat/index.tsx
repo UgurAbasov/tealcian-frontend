@@ -66,8 +66,8 @@ const ChatHome = () => {
                 },
                 body: JSON.stringify({refreshToken: localStorage.getItem('refreshToken')})
             })
-            const data = response.json()
-            data.then((result) => {
+            const data = await response.json()
+            data.then((result: any) => {
                  if(Array.isArray(result)){
                     setLastMassage(result)
                  }

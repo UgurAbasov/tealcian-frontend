@@ -56,6 +56,20 @@ const ChatHome = () => {
             })
         }
         getPrivates()
+        const getLastMassage = async () => {
+            const response = await fetch('https://tealcian-backend-production-3d2b.up.railway.app/chat/getLastMessages',{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "<origin>"
+                },
+                body: JSON.stringify(localStorage.getItem('refreshToken'))
+            })
+            const data = response.json()
+            data.then((result) => {
+                console.log(result)
+            })
+        }
     }, [])
 
     console.log(currentData)

@@ -14,12 +14,14 @@ const ChatHome = () => {
     const [noUser, setNoUsers] = useState(true)
     const [currentData,setCurrentData] = useState<object>()
     const [lastMassage, setLastMassage] = useState<any>([])
+    const [index, setIndex] = useState(0)
      const getChatData = (index: any) => {
+        setIndex(index)
         setCurrentData(allChats[index])
     }
 
     const onLastMassageByParent = (data: any) => {
-        setLastMassage(data)
+        setLastMassage(data[index])
     }
 
     useEffect(() => {

@@ -23,6 +23,9 @@ const ChatHome = () => {
         console.log(data)
         const updatedLastMassage = [...lastMassage];
             updatedLastMassage[index] = data
+
+    setLastMassage(updatedLastMassage);
+
     }
 
     useEffect(() => {

@@ -19,7 +19,10 @@ const ChatHome = () => {
     }
 
     const getChat = (data: any) => {
-        setLastMessage(data)
+        // setLastMessage(data)
+        if(data){
+            console.log(data)
+        }
     }
 
     useEffect(() => {

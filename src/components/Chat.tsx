@@ -67,7 +67,6 @@ const Chat = (props: any) => {
     useEffect(() => {
         socket.emit('join', props.data.privateId)
         socket.on('receiveMessage', (data) => {
-          props.onLastMassage(data.body)
           setMassages((prevMassages) => {
             const updatedData = [...prevMassages];
             const newObj = {
@@ -116,7 +115,6 @@ const Chat = (props: any) => {
     const addMassage = () => {
         if(inputValue.length > 0) {
             socket.emit('addMessage', {targetId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue, targetType: 'private'})
-            props.onLastMassage(inputValue)
             setMassages((prevMassages) => {
                 const updatedData = [...prevMassages];
                 const currentDate = new Date();

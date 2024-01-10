@@ -13,17 +13,8 @@ const ChatHome = () => {
     const [loadingData, setLoadingData] = useState(false)
     const [noUser, setNoUsers] = useState(true)
     const [currentData,setCurrentData] = useState<object>()
-    const [lastMassage, setLastMassage] = useState<any>([])
-    const [index, setIndex] = useState(0)
      const getChatData = (index: any) => {
-        setIndex(index)
         setCurrentData(allChats[index])
-    }
-    const onLastMassageByParent = (data: any) => {
-        console.log(data)
-        const updatedLastMassage = [...lastMassage];
-        updatedLastMassage[index] = data
-    setLastMassage(updatedLastMassage);
     }
 
     useEffect(() => {
@@ -65,23 +56,6 @@ const ChatHome = () => {
             })
         }
         getPrivates()
-        const getLastMassage = async () => {
-            const response = await fetch('https://tealcian-backend-production-3d2b.up.railway.app/chat/getLastMessages',{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "<origin>"
-                },
-                body: JSON.stringify({refreshToken: localStorage.getItem('refreshToken')})
-            })
-            const data = response.json()
-            data.then((result: any) => {
-                 if(Array.isArray(result)){
-                    setLastMassage(result)
-                 }
-            })
-        }
-        getLastMassage()
     }, [])
 
     return (
@@ -132,7 +106,7 @@ const ChatHome = () => {
                             <>
                                 {noUser ? (
                                     allChats.map((value: any, index: any) => (
-                                       <UserPanel key={index} onClick={() => getChatData(index)}  avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={value.user} lastActive='Yesterday' viewStatus={true} lastMassage={lastMassage[index] ? lastMassage[index] : 'No messages yet'} />
+                                       <UserPanel key={index} onClick={() => getChatData(index)}  avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={value.user} lastActive='Yesterday' viewStatus={true} lastMassage={'No messages yet'} />
                                     ))
                                 ) : (
                                     <div className="flex flex-col justify-center">
@@ -151,7 +125,7 @@ const ChatHome = () => {
                     </div>
                     <div className="second w-[70%]">
                         {currentData ? (
-                             <Chat data={currentData} onLastMassage={onLastMassageByParent}  />
+                             <Chat data={currentData}  />
                         ) : (
                             <p>Click to users</p>
                         )}

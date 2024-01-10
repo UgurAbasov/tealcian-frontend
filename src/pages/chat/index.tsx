@@ -66,9 +66,9 @@ const ChatHome = () => {
                 },
                 body: JSON.stringify({refreshToken: localStorage.getItem('refreshToken')})
             })
-            const data = await response.json()
-            data.then((result: any[]) => {
-                 if(Array.isArray(data)){
+            const data = response.json()
+            data.then((result) => {
+                 if(Array.isArray(result)){
                     console.log(result)
                  }
             })

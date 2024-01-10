@@ -62,9 +62,12 @@ const Chat = (props: any) => {
         fetching()
         // props.onGetMassage(massages[massages.length - 1][])
     }, [props.data.privateId])
-    const dataChat = massages[massages.length - 1].data
-    console.log(dataChat[dataChat.length - 1].body)
-    
+
+    useEffect(() => {
+      const dataChat = massages[massages.length - 1].data
+      console.log(dataChat[dataChat.length - 1].body)
+    })
+
     useEffect(() => {
         socket.emit('join', props.data.privateId)
         socket.on('receiveMessage', (data) => {

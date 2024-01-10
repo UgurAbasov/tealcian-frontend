@@ -21,7 +21,7 @@ const ChatHome = () => {
     const onLastMassageByParent = (data: any) => {
         console.log(data)
         setLastMassage((prevState: any) => {
-            const updateState = {...prevState}
+            const updateState = [...prevState]
             updateState.push(data)
             return updateState
         })

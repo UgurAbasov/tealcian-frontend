@@ -69,7 +69,7 @@ const ChatHome = () => {
             const data = response.json()
             data.then((result) => {
                  if(Array.isArray(result)){
-                    console.log(result)
+                    setLastMassage(result)
                  }
             })
         }

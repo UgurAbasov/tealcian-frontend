@@ -77,7 +77,7 @@ const ChatHome = () => {
         getLastMassage()
     }, [])
 
-    console.log(lastMassage)
+    console.log(typeof lastMassage)
     return (
         <>
             {loading ? (

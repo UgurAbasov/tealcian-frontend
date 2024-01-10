@@ -70,13 +70,14 @@ const ChatHome = () => {
             data.then((result) => {
                  console.log(result,1)
                 if(result.length > 0){
-                    console.log(result)
                     setLastMassage(result)
                 }
             })
         }
         getLastMassage()
     }, [])
+
+    console.log(lastMassage)
     return (
         <>
             {loading ? (

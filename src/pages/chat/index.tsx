@@ -66,12 +66,11 @@ const ChatHome = () => {
                 },
                 body: JSON.stringify({refreshToken: localStorage.getItem('refreshToken')})
             })
-            const data = response.json()
-            data.then((result) => {
-                 console.log(result,1)
-                if(result.length > 0){
-                    setLastMassage(result)
-                }
+            const data = await response.json()
+            data.then((result: any[]) => {
+                 if(Array.isArray(data)){
+                    console.log(result)
+                 }
             })
         }
         getLastMassage()

@@ -13,7 +13,7 @@ const ChatHome = () => {
     const [loadingData, setLoadingData] = useState(false)
     const [noUser, setNoUsers] = useState(true)
     const [currentData,setCurrentData] = useState<object>()
-    const [lastMassage, setLastMassage] = useState([])
+    const [lastMassage, setLastMassage] = useState<any>()
      const getChatData = (index: any) => {
         setCurrentData(allChats[index])
     }

@@ -13,6 +13,7 @@ const ChatHome = () => {
     const [loadingData, setLoadingData] = useState(false)
     const [noUser, setNoUsers] = useState(true)
     const [currentData,setCurrentData] = useState<object>()
+    const [lastMassage, setLastMassage] = useState([])
      const getChatData = (index: any) => {
         setCurrentData(allChats[index])
     }
@@ -67,7 +68,9 @@ const ChatHome = () => {
             })
             const data = response.json()
             data.then((result) => {
-                console.log(result)
+                if(result !== null || result){
+                    setLastMassage(result)
+                }
             })
         }
         getLastMassage()
@@ -120,7 +123,7 @@ const ChatHome = () => {
                             <>
                                 {noUser ? (
                                     allChats.map((value: any, index: any) => (
-                                       <UserPanel key={index} onClick={() => getChatData(index)} avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={value.user} lastActive='Yesterday' viewStatus={true} lastMassage='Hi how are you?' />
+                                       <UserPanel key={index} onClick={() => getChatData(index)} avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={value.user} lastActive='Yesterday' viewStatus={true} lastMassage={lastMassage[index] ? lastMassage[index] : 'No messages yet'} />
                                     ))
                                 ) : (
                                     <div className="flex flex-col justify-center">

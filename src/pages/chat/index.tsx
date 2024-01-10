@@ -67,13 +67,11 @@ const ChatHome = () => {
             })
             const data = response.json()
             data.then((result) => {
-                console.log(result)
+                console.log(result,1)
             })
         }
+        getLastMassage()
     }, [])
-
-    console.log(currentData)
-
     return (
         <>
             {loading ? (

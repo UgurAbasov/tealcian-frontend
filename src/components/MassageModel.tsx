@@ -29,7 +29,7 @@ useEffect(() => {
     </div>)
     } else {
         return (
-            <div className=" flex flex-col justify-start items-start mt-6 ml-[10px]">
+            <div className=" flex flex-row justify-start items-start mt-6 ml-[10px]">
                                   <div className=" bg-black w-8 h-8 rounded-2xl"></div>
                       <div className=" flex flex-col justify-end items-end mt-6 mr-[10px]">
                       <h1>{props.user}</h1>

@@ -57,6 +57,7 @@ const Chat = (props: any) => {
             })
             const data = response.json()
             data.then((result) => {
+              console.log(result)
                 setMassages(result)
             })
         }

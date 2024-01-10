@@ -13,7 +13,7 @@ const ChatHome = () => {
     const [loadingData, setLoadingData] = useState(false)
     const [noUser, setNoUsers] = useState(true)
     const [currentData,setCurrentData] = useState<object>()
-    const [lastMassage, setLastMassage] = useState<any>()
+    const [lastMassage, setLastMassage] = useState<any>([])
      const getChatData = (index: any) => {
         setCurrentData(allChats[index])
     }
@@ -70,7 +70,7 @@ const ChatHome = () => {
             data.then((result) => {
                  console.log(result,1)
                 if(result.length > 0){
-                    setLastMassage(result)
+                    setLastMassage([...lastMassage, result])
                 }
             })
         }

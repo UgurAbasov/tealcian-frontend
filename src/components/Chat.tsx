@@ -115,6 +115,7 @@ const Chat = (props: any) => {
     const addMassage = () => {
         if(inputValue.length > 0) {
             socket.emit('addMessage', {targetId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue, targetType: 'private'})
+            socket.emit('sendNotification', {refreshToken: localStorage.getItem('refreshToken'), roomId: props.data.privateId})
             setMassages((prevMassages) => {
                 const updatedData = [...prevMassages];
                 const currentDate = new Date();

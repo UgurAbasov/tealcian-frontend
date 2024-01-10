@@ -4,8 +4,13 @@ import UserPanel from "@/components/UsersPanel"
 import MassageModel from "@/components/MassageModel"
 import checkAuth from "@/utils/checkAuth"
 import UserSkeleton from "@/components/UserSkeleton"
-import Link from "next/link"
 import Chat from "@/components/Chat"
+import io from 'socket.io-client';
+
+
+const socket = io('https://tealcian-backend-production.up.railway.app');
+
+
 const ChatHome = () => {
     const [loading, setLoading] = useState(true)
     const router = useRouter()
@@ -18,6 +23,9 @@ const ChatHome = () => {
     }
 
     useEffect(() => {
+        socket.on('sendNotification', (data) => {
+            console.log(data)
+        })
         async function fetching() {
             const data = await checkAuth().then((result) => {
                 if (result === 0) {

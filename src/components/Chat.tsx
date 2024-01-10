@@ -63,10 +63,6 @@ const Chat = (props: any) => {
     }, [props.data.privateId])
 
     useEffect(() => {
-      if(massages.length > 0){
-        const dataChat = massages[massages.length - 1].data
-        props.onGetMassage(dataChat[dataChat.length - 1].body)
-      }
     })
 
     useEffect(() => {

@@ -13,15 +13,8 @@ const ChatHome = () => {
     const [loadingData, setLoadingData] = useState(false)
     const [noUser, setNoUsers] = useState(true)
     const [currentData,setCurrentData] = useState<object>()
-    const [lastMessage, setLastMessage] = useState('')
      const getChatData = (index: any) => {
         setCurrentData(allChats[index])
-    }
-
-    const getChat = (data: any) => {
-        if(data){
-            setLastMessage(data)
-        }
     }
 
     useEffect(() => {
@@ -135,7 +128,7 @@ const ChatHome = () => {
                     </div>
                     <div className="second w-[70%]">
                         {currentData ? (
-                             <Chat data={currentData} onGetMassage={getChat}  />
+                             <Chat data={currentData}  />
                         ) : (
                             <p>Click to users</p>
                         )}

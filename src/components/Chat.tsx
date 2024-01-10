@@ -67,7 +67,6 @@ const Chat = (props: any) => {
     useEffect(() => {
         socket.emit('join', props.data.privateId)
         socket.on('receiveMessage', (data) => {
-          props.onLastMassage(inputValue)
           setMassages((prevMassages) => {
             const updatedData = [...prevMassages];
             const newObj = {
@@ -102,6 +101,7 @@ const Chat = (props: any) => {
       
             return updatedData;
           });
+          props.onLastMassage(data.body)
         }); 
       }, [socket]);
 

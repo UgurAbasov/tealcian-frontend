@@ -15,9 +15,7 @@ const Chat = (props: any) => {
         }>;
       }
 
-      interface YourStateArrayType extends Array<YourStateType> {
-        data: any;
-}
+      interface YourStateArrayType extends Array<YourStateType> {}
 
 
     const [inputValue, setInputValue] = useState('')
@@ -63,7 +61,7 @@ const Chat = (props: any) => {
         }
         fetching()
         console.log(massages)
-        // props.onGetMassage)
+        // props.onGetMassage(massages[massages.length - 1][])
     }, [props.data.privateId])
   
     useEffect(() => {

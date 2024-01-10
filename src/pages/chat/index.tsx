@@ -19,9 +19,9 @@ const ChatHome = () => {
         setIndex(index)
         setCurrentData(allChats[index])
     }
-
     const onLastMassageByParent = (data: any) => {
-        setLastMassage(data[index])
+        const updatedLastMassage = [...lastMassage];
+            updatedLastMassage[index] = data
     }
 
     useEffect(() => {
@@ -146,7 +146,6 @@ const ChatHome = () => {
                                 <UserSkeleton />
                             </>
                         )}
-                        {/* <UserPanel avatarUrl="https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x" userName={'sdcs'} lastActive='Yesterday' viewStatus={true} lastMassage='Hi how are you?' /> */}
                     </div>
                     <div className="second w-[70%]">
                         {currentData ? (

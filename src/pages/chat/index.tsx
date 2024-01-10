@@ -20,6 +20,7 @@ const ChatHome = () => {
         setCurrentData(allChats[index])
     }
     const onLastMassageByParent = (data: any) => {
+        console.log(data)
         const updatedLastMassage = [...lastMassage];
         updatedLastMassage[index] = data
     setLastMassage(updatedLastMassage);

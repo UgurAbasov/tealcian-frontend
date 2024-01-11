@@ -79,9 +79,9 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
           alert(data.message);
           const audio = audioRef.current;
-        //   if (audio && (audio.paused || audio.ended)) {
-        //     audio.play();
-        //   }
+          if (audio && (audio.paused || audio.ended)) {
+            audio.play();
+          }
         } else {
           console.log('else');
         }
@@ -91,7 +91,10 @@ const ChatHome = () => {
 
   return (
     <>
-      <audio ref={audioRef} controls src={'./zvuk-opovesheniya-sms.mp3'}></audio>
+      {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
+      <audio controls ref={audioRef}>
+        <source src={'./zvuk-opovesheniya-sms.mp3'} type='audio/mpeg' />
+      </audio>
       {loading ? (
         <div className='h-screen flex'>
           <svg

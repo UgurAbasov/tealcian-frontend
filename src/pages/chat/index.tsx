@@ -68,12 +68,6 @@ const ChatHome = () => {
         socket.on('sendNotification', data => {
             console.log(data);
             alert('New message!!!!!!!!!!!!!')
-            alert('New message!!!!!!!!!!!!!')
-            alert('New message!!!!!!!!!!!!!')
-            alert('New message!!!!!!!!!!!!!')
-            alert('New message!!!!!!!!!!!!!')
-            alert('New message!!!!!!!!!!!!!')
-            alert('New message!!!!!!!!!!!!!')
         });
     },[socket])
 

@@ -92,8 +92,8 @@ const ChatHome = () => {
   return (
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
-      <audio autoPlay ref={audioRef}>
-        <source src='../../audio/zvuk-opovesheniya-sms.mp3' type='audio/mpeg' />
+      <audio controls ref={audioRef}>
+        <source src='../../audio/zvuk-opovesheniya-sms.mp3' type='mp3' />
       </audio>
       {loading ? (
         <div className='h-screen flex'>

@@ -81,7 +81,13 @@ const ChatHome = () => {
           let audioF = new Audio('tap-notification-180637.mp3');
           const audio = audioRef.current;
         //   if (audio && (audio.paused || audio.ended)) {
-            audioF.play();
+            audioF.addEventListener(
+              'loadeddata',
+              function () {
+                audioF.play();
+              },
+              false
+            );
         //   }
         } else {
           console.log('else');

@@ -17,6 +17,7 @@ const ChatHome = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -80,15 +81,13 @@ const ChatHome = () => {
           alert(data.message);
           let audioF = new Audio('./zvuk-opovesheniya-sms.mp3');
           const audio = audioRef.current;
-        //   if (audio && (audio.paused || audio.ended)) {
-            audioF.addEventListener(
-              'loadeddata',
-              function () {
-                audioF.play();
-              },
-              false
-            );
-        //   }
+          if (audio && (audio.paused || audio.ended)) {
+            setIsPlaying(true);
+            audio.play();
+          } else if (audio) {
+            audio.pause();
+            setIsPlaying(false);
+          }
         } else {
           console.log('else');
         }

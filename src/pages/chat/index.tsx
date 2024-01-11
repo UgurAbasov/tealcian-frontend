@@ -72,6 +72,8 @@ const ChatHome = () => {
             alert('New message!!!!!!!!!!!!!')
             alert('New message!!!!!!!!!!!!!')
             alert('New message!!!!!!!!!!!!!')
+            alert('New message!!!!!!!!!!!!!')
+            alert('New message!!!!!!!!!!!!!')
         });
     },[socket])
 

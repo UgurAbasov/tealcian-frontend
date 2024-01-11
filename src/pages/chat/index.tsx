@@ -69,7 +69,7 @@ const ChatHome = () => {
             console.log(data.userId);
             console.log(localStorage.getItem('userId'));
             console.log(localStorage.getItem('isChannel'));
-            if (JSON.parse(localStorage.getItem('isChannel') as string).status) {
+            if (localStorage.getItem('isChannel') === 'true') {
               if (data.userId.toString() !== localStorage.getItem('userId')) {
                 alert(data.message);
               } else {

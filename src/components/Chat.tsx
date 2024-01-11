@@ -110,7 +110,7 @@ const Chat = (props: any) => {
   };
 
   useEffect(() => {
-    localStorage.set('isChannel', JSON.stringify({status:true}));
+    localStorage.set('isChannel', 'true');
       socket.emit('joinToAll', { targetId: 2178 });
 
   },[])

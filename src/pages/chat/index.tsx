@@ -65,7 +65,10 @@ const ChatHome = () => {
     useEffect(() => {
         let arr = [];
         socket.emit('joinToAll', {targetId:2178});
-        socket.on('sendNotification', data => alert('New Message!'));
+        socket.on('sendNotification', data => {
+            console.log(data);
+            alert('У тебя новое сообщение пидор')
+        });
     },[socket])
 
     return (

@@ -91,7 +91,7 @@ const ChatHome = () => {
 
   return (
     <>
-      <audio ref={audioRef} controls src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio>
+      <audio ref={audioRef} controls src={'./zvuk-opovesheniya-sms.mp3'}></audio>
       {loading ? (
         <div className='h-screen flex'>
           <svg

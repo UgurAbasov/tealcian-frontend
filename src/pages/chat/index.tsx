@@ -22,6 +22,7 @@ const ChatHome = () => {
     }
 
     useEffect(() => {
+        localStorage.removeItem('isChannel');
         async function fetching() {
             const data = await checkAuth().then((result) => {
                 if (result === 0) {
@@ -69,7 +70,7 @@ const ChatHome = () => {
             console.log(data.userId);
             console.log(localStorage.getItem('userId'));
             console.log(localStorage.getItem('isChannel'));
-            if (localStorage.getItem('isChannel') !== 'true') {
+            if (localStorage.getItem('isChannel') === 'true') {
               if (data.userId.toString() !== localStorage.getItem('userId')) {
                 alert(data.message);
               } else {

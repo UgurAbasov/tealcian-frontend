@@ -67,7 +67,11 @@ const ChatHome = () => {
         socket.emit('joinToAll', {targetId:2178});
         socket.on('sendNotification', data => {
             console.log(data);
-            alert('У тебя новое сообщение пидор')
+            alert('New message!!!!!!!!!!!!!')
+            alert('New message!!!!!!!!!!!!!')
+            alert('New message!!!!!!!!!!!!!')
+            alert('New message!!!!!!!!!!!!!')
+            alert('New message!!!!!!!!!!!!!')
         });
     },[socket])
 

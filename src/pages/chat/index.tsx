@@ -63,8 +63,9 @@ const ChatHome = () => {
     }, [])
 
     useEffect(() => {
-        socket.emit('join', localStorage.getItem('refreshToken'));
-        socket.on('receiveMessage', data => console.log(data));
+        let arr = [];
+        socket.emit('joinToAll', {targetId:2178});
+        socket.on('sendNotification', data => console.log(data));
     },[])
 
     return (

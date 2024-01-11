@@ -5,11 +5,6 @@ import MassageModel from "@/components/MassageModel"
 import checkAuth from "@/utils/checkAuth"
 import UserSkeleton from "@/components/UserSkeleton"
 import Chat from "@/components/Chat"
-import io from 'socket.io-client';
-
-
-const socket = io('https://tealcian-backend-production.up.railway.app');
-
 
 const ChatHome = () => {
     const [loading, setLoading] = useState(true)
@@ -17,15 +12,13 @@ const ChatHome = () => {
     const [allChats, setAllChats] = useState<any>()
     const [loadingData, setLoadingData] = useState(false)
     const [noUser, setNoUsers] = useState(true)
-    const [currentData,setCurrentData] = useState<object>()
+    const [currentData,setCurrentData] = useState()
      const getChatData = (index: any) => {
         setCurrentData(allChats[index])
     }
 
+
     useEffect(() => {
-        socket.on('sendNotification', (data) => {
-            console.log(data)
-        })
         async function fetching() {
             const data = await checkAuth().then((result) => {
                 if (result === 0) {
@@ -133,7 +126,7 @@ const ChatHome = () => {
                     </div>
                     <div className="second w-[70%]">
                         {currentData ? (
-                             <Chat data={currentData}  />
+                            <Chat data={currentData}  />
                         ) : (
                             <p>Click to users</p>
                         )}

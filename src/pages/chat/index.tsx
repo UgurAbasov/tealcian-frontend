@@ -10,7 +10,7 @@ import { io } from 'socket.io-client';
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
 const ChatHome = () => {
-    const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [allChats, setAllChats] = useState<any>();
@@ -79,7 +79,9 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
           alert(data.message);
           const audio = audioRef.current;
-          audio?.play()
+          if (audio && (audio.paused || audio.ended)) {
+            audio.play();
+          }
         } else {
           console.log('else');
         }

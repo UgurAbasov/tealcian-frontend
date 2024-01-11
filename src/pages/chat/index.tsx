@@ -93,7 +93,7 @@ const ChatHome = () => {
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
       <audio controls>
-        <source src={'./zvuk-opovesheniya-sms.mp3'} type='audio/mpeg' />
+        <source src={'./tap-notification-180637.mp3'} type='audio/mpeg' />
       </audio>
       {loading ? (
         <div className='h-screen flex'>

@@ -66,8 +66,9 @@ const ChatHome = () => {
         let arr = [];
         socket.emit('joinToAll', {targetId:2178});
         socket.on('sendNotification', data => {
-            console.log(data);
-            alert('New message!!!!!!!!!!!!!')
+            if (data.userId !== localStorage.getItem('userId')) {
+                alert(data.message);
+            } 
         });
     },[socket])
 

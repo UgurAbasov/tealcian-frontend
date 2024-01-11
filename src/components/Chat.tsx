@@ -122,7 +122,7 @@ const Chat = (props: any) => {
         message: inputValue,
         targetType: 'private',
       });
-      socket.emit('sendNotification', {targetId: 2178});
+      socket.emit('sendNotification', {roomId: 2178, refreshToken: localStorage.getItem('refreshToken'), message: inputValue});
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const currentDate = new Date();

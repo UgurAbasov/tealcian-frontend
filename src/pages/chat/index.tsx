@@ -71,13 +71,13 @@ const ChatHome = () => {
             console.log(localStorage.getItem('userId'));
             console.log(localStorage.getItem('isChannel'));
             if (localStorage.getItem('isChannel') === 'true') {
+              console.log('chto to')
+            } else {
               if (data.userId.toString() !== localStorage.getItem('userId')) {
                 alert(data.message);
               } else {
                 console.log('else');
               }
-            } else {
-              console.log(currentData);
             }
         });
     },[socket])

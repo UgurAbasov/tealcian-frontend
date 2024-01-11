@@ -31,7 +31,7 @@ const Chat = (props: any) => {
   useEffect(() => {
     if (scrollableDivRef.current) {
       scrollableDivRef.current.scrollTo({
-        top: scrollableDivRef.current.scrollHeight,
+        top: scrollableDivRef.current.scrollHeight+50,
         behavior: 'smooth',
       });
     }

@@ -66,9 +66,11 @@ const ChatHome = () => {
         let arr = [];
         socket.emit('joinToAll', {targetId:2178});
         socket.on('sendNotification', data => {
-            if (data.userId !== localStorage.getItem('userId')) {
+            if (data.userId === localStorage.getItem('userId')) {
                 alert(data.message);
-            } 
+            } else {
+                console.log('else');
+            }
         });
     },[socket])
 

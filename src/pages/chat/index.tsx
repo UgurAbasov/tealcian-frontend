@@ -68,7 +68,7 @@ const ChatHome = () => {
         socket.on('sendNotification', data => {
             console.log(data.userId);
             console.log(localStorage.getItem('userId'));
-            if (!currentData) {
+            if (currentData === null) {
                 if (data.userId.toString() !== localStorage.getItem('userId')) {
                     alert(data.message);
                 } else {

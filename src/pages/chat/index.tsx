@@ -78,10 +78,11 @@ const ChatHome = () => {
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
           alert(data.message);
+          let audioF = new Audio('./tap-notification-180637.mp3');
           const audio = audioRef.current;
-          if (audio && (audio.paused || audio.ended)) {
-            audio.play();
-          }
+        //   if (audio && (audio.paused || audio.ended)) {
+            audioF.play();
+        //   }
         } else {
           console.log('else');
         }

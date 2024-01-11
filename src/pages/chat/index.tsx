@@ -33,13 +33,13 @@ const ChatHome = () => {
     }, [])
 
     useEffect(() => {
-                socket.emit('sendData', {
+                socket.emit('join', {
                   refreshToken: localStorage.getItem('refreshToken'),
                 });
-                socket.on('setData', data => {
+                socket.on('receiveMessage', data => {
                   console.log(data);
                 });
-    }, [socket])
+    }, [])
 
     return (
         <>

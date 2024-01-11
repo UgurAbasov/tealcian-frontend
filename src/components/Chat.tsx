@@ -106,7 +106,13 @@ const Chat = (props: any) => {
     if (event.key === 'Enter') {
       addMassage();
     }
+
   };
+
+  useEffect(() => {
+      socket.emit('joinToAll', { targetId: 2178 });
+
+  },[])
 
   const addMassage = () => {
     if (inputValue.length > 0) {
@@ -116,10 +122,8 @@ const Chat = (props: any) => {
         message: inputValue,
         targetType: 'private',
       });
-      socket.emit('sendNotification', {
-        refreshToken: localStorage.getItem('refreshToken'),
-        roomId: props.data.privateId,
-      });
+      socket.emit('sendNotification', {targetId: 2178});
+      socket.on('sendNotification', data => console.log(data));
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const currentDate = new Date();

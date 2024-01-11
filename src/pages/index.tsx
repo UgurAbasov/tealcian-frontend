@@ -6,6 +6,8 @@ import Loader from '@/components/loader/Loader';
 const Home = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+
+
   useEffect(() => {
     console.log('render')
     async function fetching() {

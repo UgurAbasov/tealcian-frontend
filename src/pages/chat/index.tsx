@@ -17,6 +17,10 @@ const ChatHome = () => {
         setCurrentData(allChats[index])
     }
 
+    useEffect(() => {
+        console.log('messege')
+    },[])
+
 
     useEffect(() => {
         async function fetching() {

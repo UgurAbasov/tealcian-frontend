@@ -5,6 +5,8 @@ import MassageModel from "@/components/MassageModel"
 import checkAuth from "@/utils/checkAuth"
 import UserSkeleton from "@/components/UserSkeleton"
 import Chat from "@/components/Chat"
+import { io } from "socket.io-client"
+const socket = io('https://tealcian-backend-production.up.railway.app');
 
 const ChatHome = () => {
     const [loading, setLoading] = useState(true)
@@ -18,11 +20,6 @@ const ChatHome = () => {
     }
 
     useEffect(() => {
-        console.log('messege')
-    },[])
-
-
-    useEffect(() => {
         async function fetching() {
             const data = await checkAuth().then((result) => {
                 if (result === 0) {
@@ -33,35 +30,16 @@ const ChatHome = () => {
             })
         }
         fetching()
-        async function getPrivates() {
-            const refreshToken = localStorage.getItem('refreshToken')
-            const response = await fetch('https://tealcian-backend-production-3d2b.up.railway.app/chat/getPrivates', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "<origin>"
-                },
-                body: JSON.stringify({ refreshToken })
-            })
-            const data = response.json()
-            data.then((result) => {
-                if (result.objectArr) {
-                    if (result.objectArr.length > 0) {
-                        setLoadingData(true)
-                        setAllChats(result.objectArr)
-                    } else {
-                        setLoadingData(true)
-                        setNoUsers(false)
-                    }
-                } else {
-                    if (result.length < 0) {
-                        setNoUsers(false)
-                    }
-                }
-            })
-        }
-        getPrivates()
     }, [])
+
+    useEffect(() => {
+                socket.emit('sendData', {
+                  refreshToken: localStorage.getItem('refreshToken'),
+                });
+                socket.on('setData', data => {
+                  console.log(data);
+                });
+    }, [socket])
 
     return (
         <>

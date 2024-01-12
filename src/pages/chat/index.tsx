@@ -75,11 +75,9 @@ const ChatHome = () => {
         console.log('chto to');
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
+            alert(data.message);
             const audio = audioRef.current;
-            setTimeout(() => {
                 audio?.play()
-            }, 100)
-          alert(data.message);
         } else {
           console.log('else');
         }
@@ -89,7 +87,7 @@ const ChatHome = () => {
 
   return (
     <>
-      <audio ref={audioRef}>
+      <audio ref={audioRef} muted autoPlay={true}>
         <source src='/tap-notification-180637.mp3' type='audio/mpeg' />
       </audio>
       {loading ? (

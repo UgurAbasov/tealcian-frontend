@@ -69,6 +69,11 @@ const ChatHome = () => {
 
   useEffect(() => {
     console.log(allChats)
+    if(allChats){
+        for(let i = 0; i < allChats.length; i++){
+            console.log(allChats[i].privateId)
+        }
+    }
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {

@@ -56,7 +56,7 @@ const ChatHome = () => {
             for(let i = 0; i < result.objectArr.length; i++){
                 setRooms((prevState: any) => {
                     const updateState = [...prevState]
-                    updateState.push(allChats[i].privateId)
+                    updateState.push(result.objectArr[i].privateId)
                     return updateState
             })
         }

@@ -89,7 +89,7 @@ const ChatHome = () => {
   return (
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
-      <audio controls>
+      <audio ref={audioRef} controls>
         <source src={'./tap-notification-180637.mp3'} type='audio/mpeg' />
       </audio>
       {loading ? (

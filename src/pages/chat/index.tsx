@@ -68,6 +68,7 @@ const ChatHome = () => {
   }, []);
 
   useEffect(() => {
+    let state = 0
     if(allChats){
         for(let i = 0; i < allChats.length; i++){
             socket.emit('joinToAll', { targetId: allChats[i].privateId });
@@ -82,14 +83,13 @@ const ChatHome = () => {
             audio?.play().catch(() => {
                 console.log('nono')
             })
-            let state = 0
             if(state === 0){
                 console.log(state)
                 setNotification((prevState) => {
                     const newState = prevState + 1
                     return newState
                 })
-                state++
+                state = 1
             }
         } else {
           console.log('else');

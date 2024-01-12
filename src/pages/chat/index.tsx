@@ -17,7 +17,7 @@ const ChatHome = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [rooms, setRooms] = useState();
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -68,13 +68,14 @@ const ChatHome = () => {
   }, []);
 
   useEffect(() => {
-    let arr = [];
-    console.log(allChats)
     if(allChats){
-    for(let i = 0; i < allChats.length; i++){
-        console.log(allChats[i].privateId)
+        for(let i = 0; i < allChats.length; i++){
+            console.log(allChats[i].privateId)
+        }
     }
-}
+  }, [])
+
+  useEffect(() => {
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {

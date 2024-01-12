@@ -74,23 +74,16 @@ const ChatHome = () => {
       console.log(data.userId);
       console.log(localStorage.getItem('userId'));
       console.log(localStorage.getItem('isChannel'));
-      if (localStorage.getItem('isChannel') === 'true') {
-        console.log('chto to');
-      } else {
+      // if (localStorage.getItem('isChannel') === 'true') {
+        // console.log('chto to');
+      // } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
           alert(data.message);
-          let audioF = new Audio('./zvuk-opovesheniya-sms.mp3');
           const audio = audioRef.current;
-          if (audio && (audio.paused || audio.ended)) {
-            setIsPlaying(true);
-            audio.play();
-          } else if (audio) {
-            audio.pause();
-            setIsPlaying(false);
-          }
-        } else {
-          console.log('else');
-        }
+            audio?.play();
+        // } else {
+          // console.log('else');
+        // }
       }
     });
   }, [socket]);
@@ -99,7 +92,7 @@ const ChatHome = () => {
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
       <audio controls>
-        <source src={'./tap-notification-180637.mp3'} type='audio/mpeg' />
+        <source src={'/fsdsdfhh.mp3'} type='audio/mpeg' />
       </audio>
       {loading ? (
         <div className='h-screen flex'>

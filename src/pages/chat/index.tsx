@@ -77,9 +77,7 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
             alert(data.message);
             const audio = audioRef.current;
-            audio?.addEventListener("canplay", (event) => {
-                console.log("Video can start, but not sure it will play through.");
-              });
+                audio?.play();
         } else {
           console.log('else');
         }
@@ -89,7 +87,7 @@ const ChatHome = () => {
 
   return (
     <>
-      <audio ref={audioRef}>
+      <audio ref={audioRef} autoPlay muted>
         <source src='/tap-notification-180637.mp3' type='audio/mpeg' />
       </audio>
       {loading ? (

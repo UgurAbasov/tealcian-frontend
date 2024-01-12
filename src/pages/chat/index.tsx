@@ -85,7 +85,8 @@ const ChatHome = () => {
             alert(data.message);
             console.log(notification)
             setNotification((prevState) => {
-                return prevState++
+                const newState = prevState + 1
+                return newState
             })
         } else {
           console.log('else');

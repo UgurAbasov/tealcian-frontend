@@ -77,11 +77,9 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
             alert(data.message);
             const audio = audioRef.current;
-            if (audio && (audio.paused || audio.ended)) {
-                audio.play();
-              } else if (audio) {
-                audio.pause();
-              }
+            audio?.addEventListener("canplay", (event) => {
+                console.log("Video can start, but not sure it will play through.");
+              });
         } else {
           console.log('else');
         }

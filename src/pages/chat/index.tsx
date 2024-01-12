@@ -78,8 +78,11 @@ const ChatHome = () => {
         console.log('chto to');
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
+          alert(data.message);
           const audio = audioRef.current;
-          audio?.play();
+            audio?.play();
+        } else {
+          console.log('else');
         }
       }
     });
@@ -89,7 +92,7 @@ const ChatHome = () => {
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
       <audio controls>
-        <source src={'/fsdsdfhh.mp3'} type='audio/mpeg' />
+        <source src={'/tap-notification-180637.mp3'} type='audio/mpeg' />
       </audio>
       {loading ? (
         <div className='h-screen flex'>

@@ -77,7 +77,7 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
             const audio = audioRef.current;
             audio?.play()
-          alert(data.message);
+            console.log(data.message);
         } else {
           console.log('else');
         }
@@ -89,7 +89,7 @@ const ChatHome = () => {
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
       <audio ref={audioRef}>
-        <source src='/gdfgdgf.mp3' type='audio/mpeg' />
+        <source src='/fsdsdfhh.mp3' type='audio/mpeg' />
       </audio>
       {loading ? (
         <div className='h-screen flex'>

@@ -78,6 +78,7 @@ const ChatHome = () => {
         console.log('chto to');
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
+            console.log('halo')
             const audio = audioRef.current;
             audio?.play().catch(() => {
                 console.log('nono')

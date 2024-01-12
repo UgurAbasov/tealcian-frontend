@@ -87,7 +87,7 @@ const ChatHome = () => {
 
   return (
     <>
-      <audio ref={audioRef} autoPlay muted>
+      <audio ref={audioRef}>
         <source src='/tap-notification-180637.mp3' type='audio/mpeg' />
       </audio>
       {loading ? (

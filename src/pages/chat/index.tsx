@@ -53,6 +53,9 @@ const ChatHome = () => {
           if (result.objectArr.length > 0) {
             setLoadingData(true);
             setAllChats(result.objectArr);
+            for(let i = 0; i < allChats.length; i++){
+                setRooms(allChats[i].privateId)
+            }
           } else {
             setLoadingData(true);
             setNoUsers(false);
@@ -68,14 +71,7 @@ const ChatHome = () => {
   }, []);
 
   useEffect(() => {
-    if(allChats){
-        for(let i = 0; i < allChats.length; i++){
-            console.log(allChats[i].privateId)
-        }
-    }
-  }, [])
-
-  useEffect(() => {
+    console.log(set)
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {

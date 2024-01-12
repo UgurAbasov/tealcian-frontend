@@ -75,16 +75,16 @@ const ChatHome = () => {
       console.log(localStorage.getItem('userId'));
       console.log(localStorage.getItem('isChannel'));
       // if (localStorage.getItem('isChannel') === 'true') {
-        // console.log('chto to');
+      //   console.log('chto to');
       // } else {
-        if (data.userId.toString() !== localStorage.getItem('userId')) {
+      //   if (data.userId.toString() !== localStorage.getItem('userId')) {
           alert(data.message);
           const audio = audioRef.current;
             audio?.play();
         // } else {
-          // console.log('else');
+        //   console.log('else');
         // }
-      }
+      // }
     });
   }, [socket]);
 

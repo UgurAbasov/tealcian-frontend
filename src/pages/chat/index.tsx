@@ -53,7 +53,7 @@ const ChatHome = () => {
           if (result.objectArr.length > 0) {
             setLoadingData(true);
             setAllChats(result.objectArr);
-            for(let i = 0; i < allChats.length; i++){
+            for(let i = 0; i < result.objectArr.length; i++){
                 setRooms((prevState: any) => {
                     const updateState = [...prevState]
                     updateState.push(allChats[i].privateId)

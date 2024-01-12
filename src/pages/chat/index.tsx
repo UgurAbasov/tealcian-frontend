@@ -69,7 +69,6 @@ const ChatHome = () => {
 
   useEffect(() => {
     let arr = [];
-    
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
       console.log(data.userId);
@@ -78,13 +77,10 @@ const ChatHome = () => {
       // if (localStorage.getItem('isChannel') === 'true') {
       //   console.log('chto to');
       // } else {
-      //   if (data.userId.toString() !== localStorage.getItem('userId')) {
-          alert(data.message);
+        if (data.userId.toString() !== localStorage.getItem('userId')) {
           const audio = audioRef.current;
-            audio?.play();
-        // } else {
-        //   console.log('else');
-        // }
+          audio?.play();
+        }
       // }
     });
   }, [socket]);

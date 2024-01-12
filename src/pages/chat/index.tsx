@@ -17,7 +17,7 @@ const ChatHome = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
-  const [rooms, setRooms] = useState<any>();
+  const [notification, setNotification] = useState(0)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -83,6 +83,9 @@ const ChatHome = () => {
                 console.log('nono')
             })
             alert(data.message);
+            setNotification((prevState) => {
+                return prevState++
+            })
         } else {
           console.log('else');
         }
@@ -195,6 +198,7 @@ const ChatHome = () => {
                       lastActive='Yesterday'
                       viewStatus={true}
                       lastMassage={'No messages yet'}
+                      notification={notification}
                     />
                   ))
                 ) : (

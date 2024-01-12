@@ -71,23 +71,13 @@ const ChatHome = () => {
     let arr = [];
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
-      console.log(data.userId);
-      console.log(localStorage.getItem('userId'));
-      console.log(localStorage.getItem('isChannel'));
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('chto to');
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
+            const audio = audioRef.current;
+            audio?.play()
           alert(data.message);
-          let audioF = new Audio('./zvuk-opovesheniya-sms.mp3');
-          const audio = audioRef.current;
-          if (audio && (audio.paused || audio.ended)) {
-            setIsPlaying(true);
-            audio.play();
-          } else if (audio) {
-            audio.pause();
-            setIsPlaying(false);
-          }
         } else {
           console.log('else');
         }
@@ -98,8 +88,8 @@ const ChatHome = () => {
   return (
     <>
       {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
-      <audio controls>
-        <source src={'./tap-notification-180637.mp3'} type='audio/mpeg' />
+      <audio ref={audioRef}>
+        <source src='/gdfgdgf.mp3' type='audio/mpeg' />
       </audio>
       {loading ? (
         <div className='h-screen flex'>

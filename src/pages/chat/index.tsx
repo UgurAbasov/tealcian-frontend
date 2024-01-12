@@ -82,12 +82,14 @@ const ChatHome = () => {
             audio?.play().catch(() => {
                 console.log('nono')
             })
-            alert(data.message);
-            console.log(notification)
-            setNotification((prevState) => {
-                const newState = prevState + 1
-                return newState
-            })
+            let state = 0
+            if(state === 0){
+                setNotification((prevState) => {
+                    const newState = prevState + 1
+                    return newState
+                })
+                state++
+            }
         } else {
           console.log('else');
         }

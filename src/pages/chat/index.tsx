@@ -74,14 +74,14 @@ const ChatHome = () => {
       console.log(data.userId);
       console.log(localStorage.getItem('userId'));
       console.log(localStorage.getItem('isChannel'));
-      // if (localStorage.getItem('isChannel') === 'true') {
-      //   console.log('chto to');
-      // } else {
+      if (localStorage.getItem('isChannel') === 'true') {
+        console.log('chto to');
+      } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
           const audio = audioRef.current;
           audio?.play();
         }
-      // }
+      }
     });
   }, [socket]);
 

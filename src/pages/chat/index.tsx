@@ -83,6 +83,7 @@ const ChatHome = () => {
                 console.log('nono')
             })
             alert(data.message);
+            console.log(notification)
             setNotification((prevState) => {
                 return prevState++
             })

@@ -71,9 +71,6 @@ const ChatHome = () => {
     let arr = [];
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
-      console.log(data.userId);
-      console.log(localStorage.getItem('userId'));
-      console.log(localStorage.getItem('isChannel'));
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('chto to');
       } else {
@@ -81,8 +78,7 @@ const ChatHome = () => {
           alert(data.message);
           let audioF = new Audio('./zvuk-opovesheniya-sms.mp3');
           const audio = audioRef.current;
-          console.log(audio)
-          console.log(audioF)
+          audio?.play()
         } else {
           console.log('else');
         }

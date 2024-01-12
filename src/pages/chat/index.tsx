@@ -81,13 +81,8 @@ const ChatHome = () => {
           alert(data.message);
           let audioF = new Audio('./zvuk-opovesheniya-sms.mp3');
           const audio = audioRef.current;
-          if (audio && (audio.paused || audio.ended)) {
-            setIsPlaying(true);
-            audio.play();
-          } else if (audio) {
-            audio.pause();
-            setIsPlaying(false);
-          }
+          console.log(audio)
+          console.log(audioF)
         } else {
           console.log('else');
         }

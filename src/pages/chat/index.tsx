@@ -53,13 +53,6 @@ const ChatHome = () => {
           if (result.objectArr.length > 0) {
             setLoadingData(true);
             setAllChats(result.objectArr);
-            for(let i = 0; i < result.objectArr.length; i++){
-                setRooms((prevState: any) => {
-                    const updateState = [...prevState]
-                    updateState.push(result.objectArr[i].privateId)
-                    return updateState
-            })
-        }
           } else {
             setLoadingData(true);
             setNoUsers(false);
@@ -76,7 +69,7 @@ const ChatHome = () => {
 
   console.log(rooms)
   useEffect(() => {
-    console.log(rooms)
+    console.log(allChats)
     socket.emit('joinToAll', { targetId: 2178 });
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {

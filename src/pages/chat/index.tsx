@@ -80,7 +80,7 @@ const ChatHome = () => {
             audio?.play()
           alert(data.message);
         } else {
-          console.log('else');
+          console.log('halo');
         }
       }
     });

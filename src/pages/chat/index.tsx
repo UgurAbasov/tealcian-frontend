@@ -80,9 +80,9 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
           alert(data.message);
           const audio = audioRef.current;
-            audio?.play();
+          audio?.play()
         } else {
-          console.log('else')
+          console.log('else');
         }
       }
     });

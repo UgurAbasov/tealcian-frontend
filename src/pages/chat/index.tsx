@@ -67,7 +67,6 @@ const ChatHome = () => {
     getPrivates();
   }, []);
 
-  console.log(rooms)
   useEffect(() => {
     console.log(allChats)
     socket.emit('joinToAll', { targetId: 2178 });
@@ -86,7 +85,7 @@ const ChatHome = () => {
         }
       }
     });
-  }, [socket]);
+  }, [socket, allChats]);
 
   return (
     <>

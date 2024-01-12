@@ -77,7 +77,11 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
             alert(data.message);
             const audio = audioRef.current;
-                audio?.play()
+            if (audio && (audio.paused || audio.ended)) {
+                audio.play();
+              } else if (audio) {
+                audio.pause();
+              }
         } else {
           console.log('else');
         }

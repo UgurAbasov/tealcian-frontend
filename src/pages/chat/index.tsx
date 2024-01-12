@@ -77,7 +77,7 @@ const ChatHome = () => {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
             const audio = audioRef.current;
             audio?.play()
-          console.log(data.message);
+          alert(data.message);
         } else {
           console.log('else');
         }
@@ -87,6 +87,7 @@ const ChatHome = () => {
 
   return (
     <>
+      {/* <audio autoPlay src={'../../audio/zvuk-opovesheniya-sms.mp3'}></audio> */}
       <audio ref={audioRef}>
         <source src='/tap-notification-180637.mp3' type='audio/mpeg' />
       </audio>

@@ -82,7 +82,7 @@ const ChatHome = () => {
           const audio = audioRef.current;
             audio?.play();
         } else {
-          console.log('else');
+          console.log('else')
         }
       }
     });

@@ -92,7 +92,6 @@ const ChatHome = () => {
   }, [currentData])
   
   useEffect(() => {
-    console.log('h')
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') !== 'true') {
         if (data.userId.toString() !== localStorage.getItem('userId')){
@@ -109,7 +108,7 @@ const ChatHome = () => {
                 notification.forEach((element: any) => {
                     const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
                     console.log(update[index].state)
-                    update[index] = {...update[index], state: update[index].state }
+                    update[index] = {...update[index], state: update[index].state + 1}
                 })
                 return update
             })

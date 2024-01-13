@@ -103,6 +103,7 @@ const ChatHome = () => {
                     console.log('nono')
                 }) 
             }
+            console.log(notification,4)
             const update = [...notification]
             console.log(update,2)
             notification.forEach((element: any) => {

@@ -107,9 +107,10 @@ const ChatHome = () => {
             console.log(update)
             notification.forEach((element: any) => {
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
-                update[index] = {...update[index], state: update[index].state++}
+                update[index] = {...update[index], state: update[index].state + 1}
             });
             setNotification(update)
+            console.log(notification,4)
         } else {
           console.log('else');
           }
@@ -221,7 +222,7 @@ const ChatHome = () => {
                       lastActive='Yesterday'
                       viewStatus={true}
                       lastMassage={'No messages yet'}
-                      notification={notification}
+                      notification={notification[index]}
                     />
                   ))
                 ) : (

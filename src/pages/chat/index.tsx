@@ -59,6 +59,7 @@ const ChatHome = () => {
             result.objectArr.forEach((value: any) => {
            const updateNotification = [...notification]
             updateNotification.push({state: 0, privateId: value.privateId})
+            setNotification(updateNotification)
             })
           } else {
             setLoadingData(true);

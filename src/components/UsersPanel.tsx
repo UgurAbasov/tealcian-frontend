@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 const UserPanel = (props: any) => {
-    console.log(props.notification.state)
+    console.log(props.notification)
     return (
         <button onClick={props.onClick} className="flex w-full justify-center items-center focus:bg-[#cecbd4] mb-5">
         <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-black rounded-full dark:bg-gray-600">
@@ -21,7 +21,7 @@ const UserPanel = (props: any) => {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
                 </svg> : ' '}
                 <p className=" text-[#686670] truncate text-[13px] w-[190px] ">{props.lastMassage}</p>
-                {props.notification.state > 0 && (
+                {0 > 0 && (
                     <div className=" bg-red-700 mt-auto mr-auto w-8 h-6 rounded-lg">{props.notification}</div>
                 )}
             </div>

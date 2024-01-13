@@ -223,7 +223,7 @@ const ChatHome = () => {
                       lastActive='Yesterday'
                       viewStatus={true}
                       lastMassage={'No messages yet'}
-                      notification={notification[index] || null}
+                      notification={notification[index].state || null}
                     />
                   ))
                 ) : (

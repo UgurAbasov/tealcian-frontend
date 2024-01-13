@@ -103,16 +103,15 @@ const ChatHome = () => {
             }
 
             setNotification((prevState: any) => {
-                return prevState.map((item: any) => {
-                  if (item.privateId === data.privateId) {
-                    console.log(item, 3);
-                    return { ...item, state: item.state + 1 };
-                  } else {
-                    return { ...item, state: item.state};
-                  }
-                  return item;
-                });
+                const index = prevState.findIndex((item: any) => item.privateId === data.privateId);
+              
+                if (index !== -1) {
+                  return prevState.map((item: any, i: number) => i === index ? { ...item, state: item.state + 1 } : item);
+                } else {
+                  return [...prevState, { privateId: data.privateId, state: 1 }];
+                }
               });
+              
         } else {
           console.log('else');
           }

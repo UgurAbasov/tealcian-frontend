@@ -111,7 +111,7 @@ const ChatHome = () => {
                     console.log(update[index].state)
                     update[index] = {...update[index], state: update[index].state + }
                 })
-                // return update
+                return update
             })
         } else {
           console.log('else');

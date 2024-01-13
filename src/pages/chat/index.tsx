@@ -55,6 +55,11 @@ const ChatHome = () => {
             setLoadingData(true);
             setAllChats(result.objectArr);
             setReadyForData(true)
+            const updateNotification = [...notification]
+            result.objectArr.forEach((value: any) => {
+            updateNotification.push({state: 0, privateId: value.privateId})
+            })
+            setNotification(updateNotification)
           } else {
             setLoadingData(true);
             setNoUsers(false);
@@ -98,26 +103,20 @@ const ChatHome = () => {
                     console.log('nono')
                 }) 
             }
-            const updateNotification = [...notification]
-            allChats.forEach((value: any) => {
-            updateNotification.push({state: 0, privateId: value.privateId})
-            })
-            setNotification(updateNotification)
-            const update = [...notification]
-            console.log(update,2)
-            notification.forEach((element: any) => {
-                const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
-                update[index] = {...update[index], state: update[index].state + 1}
-            })
-            setNotification(update)
+            console.log(notification)
+            // const update = [...notification]
+            // console.log(update,2)
+            // notification.forEach((element: any) => {
+            //     const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
+            //     update[index] = {...update[index], state: update[index].state + 1}
+            // })
+            // setNotification(update)
         } else {
           console.log('else');
           }
       }
     })
   }, [socket])
-
-  console.log(notification,3)
   return (
     <>
       <audio ref={audioRef}>

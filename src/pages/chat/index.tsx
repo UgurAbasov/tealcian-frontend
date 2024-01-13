@@ -78,8 +78,7 @@ const ChatHome = () => {
   }, [readyForData])
 
   useEffect(() => {
-    console.log(1)
-    socket.once('sendNotification', data => {
+    socket.on('sendNotification', data => {
         console.log(data)
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('chto to');

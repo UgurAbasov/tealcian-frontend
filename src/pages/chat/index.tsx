@@ -115,7 +115,7 @@ const ChatHome = () => {
           }
       }
     })
-  }, [socket])
+  }, [socket, currentData])
 
   console.log(notification)
 

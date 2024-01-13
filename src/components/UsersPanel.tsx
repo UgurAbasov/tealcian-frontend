@@ -19,7 +19,7 @@ const UserPanel = (props: any) => {
                 </svg> : ' '}
                 <p className=" text-[#686670] truncate text-[13px] w-[190px] ">{props.lastMassage}</p>
                 {props.notification > 0 && (
-                    <div className=" bg-red-700 mt-auto mr-auto w-8 h-8 rounded-lg">{props.notification}</div>
+                    <div className=" bg-red-700 mt-auto mr-auto w-8 h-6 rounded-lg">{props.notification}</div>
                 )}
             </div>
         </div>

@@ -18,6 +18,7 @@ const ChatHome = () => {
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState(0)
+  const [readyForData, setReadyForData] = useState(false)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -53,6 +54,7 @@ const ChatHome = () => {
           if (result.objectArr.length > 0) {
             setLoadingData(true);
             setAllChats(result.objectArr);
+            setReadyForData(true)
           } else {
             setLoadingData(true);
             setNoUsers(false);
@@ -68,7 +70,7 @@ const ChatHome = () => {
   }, []);
 
   useEffect(() => {
-    if(allChats){
+    if(readyForData){
         for(let i = 0; i < allChats.length; i++){
             socket.emit('joinToAll', { targetId: allChats[i].privateId });
         }
@@ -79,7 +81,6 @@ const ChatHome = () => {
         console.log('chto to');
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
-            console.log('halo')
             const audio = audioRef.current;
             audio?.play().catch(() => {
                 console.log('nono')
@@ -93,7 +94,7 @@ const ChatHome = () => {
         }
       }
     });
-  }, [socket, allChats]);
+  }, [socket, readyForData])
 
   return (
     <>

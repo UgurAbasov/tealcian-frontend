@@ -112,7 +112,6 @@ const Chat = (props: any) => {
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
       socket.emit('joinToAll', { targetId: 2178 });
-
   },[])
 
   const addMassage = () => {

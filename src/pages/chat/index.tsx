@@ -114,7 +114,7 @@ const ChatHome = () => {
           }
       }
     })
-  }, [socket])
+  }, [notification])
   return (
     <>
       <audio ref={audioRef}>

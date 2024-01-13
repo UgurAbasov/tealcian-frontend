@@ -55,11 +55,11 @@ const ChatHome = () => {
             setLoadingData(true);
             setAllChats(result.objectArr);
             setReadyForData(true)
+            const updateNotification = [...notification]
             result.objectArr.forEach((value: any) => {
-           const updateNotification = [...notification]
             updateNotification.push({state: 0, privateId: value.privateId})
-            setNotification(updateNotification)
             })
+            setNotification(updateNotification)
           } else {
             setLoadingData(true);
             setNoUsers(false);

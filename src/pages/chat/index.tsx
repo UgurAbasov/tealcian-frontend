@@ -92,6 +92,7 @@ const ChatHome = () => {
   }, [currentData])
   
   useEffect(() => {
+    console.log('h')
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') !== 'true') {
         if (data.userId.toString() !== localStorage.getItem('userId')){
@@ -101,25 +102,23 @@ const ChatHome = () => {
                     console.log('nono')
                 }) 
             }
-            console.log(notification)
-            const update = [...notification]
-            console.log(update,2)
-            if(notification.length !== 0){
+
+            setNotification((prevState: any) => {
+                console.log(prevState)
+                const update = [...prevState]
                 notification.forEach((element: any) => {
                     const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
                     console.log(update[index].state)
                     update[index] = {...update[index], state: update[index].state }
                 })
-                setNotification(update)
-            } else {
-                setLimit(false)
-            }
+                return update
+            })
         } else {
           console.log('else');
           }
       }
     })
-  }, [socket, limit])
+  }, [socket])
 
   return (
     <>

@@ -79,7 +79,6 @@ const ChatHome = () => {
 
   
   useEffect(() => {
-    console.log(localStorage.getItem('isChannel'))
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('halo')

@@ -50,16 +50,11 @@ const ChatHome = () => {
       );
       const data = response.json();
       data.then(result => {
-        if (result.objectArr) {
+        if (result.objectArr){
           if (result.objectArr.length > 0) {
             setLoadingData(true);
             setAllChats(result.objectArr);
             setReadyForData(true)
-            const updateNotification = [...notification]
-            result.objectArr.forEach((value: any) => {
-            updateNotification.push({state: 0, privateId: value.privateId})
-            })
-            setNotification(updateNotification)
           } else {
             setLoadingData(true);
             setNoUsers(false);
@@ -103,7 +98,11 @@ const ChatHome = () => {
                     console.log('nono')
                 }) 
             }
-            console.log(notification,4)
+            const updateNotification = [...notification]
+            allChats.forEach((value: any) => {
+            updateNotification.push({state: 0, privateId: value.privateId})
+            })
+            setNotification(updateNotification)
             const update = [...notification]
             console.log(update,2)
             notification.forEach((element: any) => {

@@ -85,7 +85,7 @@ const ChatHome = () => {
 
   useEffect(() => {
     if (localStorage.getItem('isChannel') === 'true') {
-        notification.forEach((value: any) => {
+        notification.map((value: any) => {
             console.log(value)
         })
     }

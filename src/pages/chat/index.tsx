@@ -75,10 +75,7 @@ const ChatHome = () => {
             socket.emit('joinToAll', { targetId: allChats[i].privateId });
         }
     }
-  }, [readyForData])
-
-  useEffect(() => {
-    socket.on('sendNotification', data => {
+    socket.once('sendNotification', data => {
         console.log(data)
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('chto to');

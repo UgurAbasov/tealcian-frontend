@@ -89,9 +89,6 @@ const ChatHome = () => {
         })
     }
   }, [currentData])
-
-
-
   
   useEffect(() => {
     socket.on('sendNotification', data => {
@@ -104,19 +101,20 @@ const ChatHome = () => {
                 }) 
             }
             console.log(notification)
-            // const update = [...notification]
-            // console.log(update,2)
-            // notification.forEach((element: any) => {
-            //     const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
-            //     update[index] = {...update[index], state: update[index].state + 1}
-            // })
-            // setNotification(update)
+            const update = [...notification]
+            console.log(update,2)
+            notification.forEach((element: any) => {
+                const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
+                update[index] = {...update[index], state: update[index].state + 1}
+            })
+            setNotification(update)
         } else {
           console.log('else');
           }
       }
     })
-  }, [socket])
+  }, [socket, notification])
+
   return (
     <>
       <audio ref={audioRef}>

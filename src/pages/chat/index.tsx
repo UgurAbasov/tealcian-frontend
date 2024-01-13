@@ -97,7 +97,6 @@ const ChatHome = () => {
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') !== 'true') {
         if (data.userId.toString() !== localStorage.getItem('userId')){
-            console.log(1)
             if(!document.hasFocus()){
                 const audio = audioRef.current;
                 audio?.play().catch(() => {
@@ -105,15 +104,16 @@ const ChatHome = () => {
                 }) 
             }
             const update = [...notification]
+            console.log(update)
             notification.forEach((element: any) => {
-            console.log(element)
+            console.log(element, 1)
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.private)
-                console.log(index)
-                console.log(update)
+                console.log(index, 2)
+                console.log(update, 3)
                 update[index] = {...update[index], state: update[index].state}
             });
             setNotification(update)
-            console.log(notification)
+            console.log(notification,4)
         } else {
           console.log('else');
           }

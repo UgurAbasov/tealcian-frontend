@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 const UserPanel = (props: any) => {
 
-    console.log(props.notification)
+    console.log(props.notification,1)
     return (
         <button onClick={props.onClick} className="flex w-full justify-center items-center focus:bg-[#cecbd4] mb-5">
         <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-black rounded-full dark:bg-gray-600">

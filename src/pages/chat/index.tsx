@@ -18,7 +18,7 @@ const ChatHome = () => {
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState<any>([])
-  const [notificationLimit, setNotificationLimit] = useState(false)
+  const [readyForData, setReadyForData] = useState(false)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -54,6 +54,7 @@ const ChatHome = () => {
           if (result.objectArr.length > 0) {
             setLoadingData(true);
             setAllChats(result.objectArr);
+            setReadyForData(true)
             const updateNotification = [...notification]
             result.objectArr.forEach((value: any) => {
             updateNotification.push({state: 0, privateId: value.privateId})
@@ -74,10 +75,12 @@ const ChatHome = () => {
   }, []);
 
   useEffect(() => {
+    if(readyForData){
         for(let i = 0; i < allChats.length; i++){
             socket.emit('joinToAll', { targetId: allChats[i].privateId });
+        }
     }
-  }, [allChats])
+  }, [readyForData])
 
   useEffect(() => {
     if (localStorage.getItem('isChannel') === 'true') {
@@ -111,7 +114,7 @@ const ChatHome = () => {
           }
       }
     })
-  }, [socket,notification])
+  }, [socket, notification])
   return (
     <>
       <audio ref={audioRef}>

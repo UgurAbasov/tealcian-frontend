@@ -77,15 +77,14 @@ const ChatHome = () => {
     }
   }, [readyForData])
 
-  console.log(currentData)
-
   useEffect(() => {
+    console.log()
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('halo')
         setNotification(0)
       } else {
-        if (data.userId.toString() !== localStorage.getItem('userId')) {
+        if (data.userId.toString() !== localStorage.getItem('userId')){
             if(!document.hasFocus()){
                 const audio = audioRef.current;
                 audio?.play().catch(() => {

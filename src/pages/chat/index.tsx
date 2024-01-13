@@ -104,6 +104,7 @@ const ChatHome = () => {
                 }) 
             }
             const update = [...notification]
+            console.log(update,2)
             notification.forEach((element: any) => {
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
                 update[index] = {...update[index], state: update[index].state + 1}
@@ -114,7 +115,9 @@ const ChatHome = () => {
           }
       }
     })
-  }, [notification])
+  }, [socket])
+
+  console.log(notification,3)
   return (
     <>
       <audio ref={audioRef}>

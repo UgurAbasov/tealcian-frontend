@@ -110,7 +110,6 @@ const ChatHome = () => {
                 update[index] = {...update[index], state: update[index].state + 1}
             })
             setNotification(update)
-            console.log(notification,4)
         } else {
           console.log('else');
           }
@@ -216,14 +215,13 @@ const ChatHome = () => {
                   allChats.map((value: any, index: any) => (
                     <UserPanel
                       key={index}
-                      index={index}
                       onClick={() => getChatData(index)}
                       avatarUrl='https://gravatar.com/avatar/2e5178124f4966c5679f41dc9ef3129a?s=400&d=robohash&r=x'
                       userName={value.user}
                       lastActive='Yesterday'
                       viewStatus={true}
                       lastMassage={'No messages yet'}
-                      notification={notification}
+                      notification={notification[index] || null}
                     />
                   ))
                 ) : (

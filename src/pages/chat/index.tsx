@@ -70,6 +70,7 @@ const ChatHome = () => {
   }, []);
 
   useEffect(() => {
+    console.log(1)
     if(readyForData){
         for(let i = 0; i < allChats.length; i++){
             socket.emit('joinToAll', { targetId: allChats[i].privateId });

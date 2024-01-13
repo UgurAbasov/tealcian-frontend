@@ -109,9 +109,6 @@ const ChatHome = () => {
                   if (item.privateId === data.privateId) {
                     console.log(item, 3);
                     return { ...item, state: item.state + 1 };
-                  } else {
-                    console.log(item, 4)
-                    return { ...item, state: item.state};
                   }
                   return item;
                 });

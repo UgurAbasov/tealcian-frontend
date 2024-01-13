@@ -109,7 +109,7 @@ const ChatHome = () => {
                     console.log(element)
                     const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
                     console.log(update[index].state)
-                    update[index] = {...update[index], state: update[index].state + }
+                    update[index] = {...update[index], state: update[index].state + 1}
                 })
                 return update
             })

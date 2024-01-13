@@ -103,12 +103,14 @@ const ChatHome = () => {
             }
 
             setNotification((prevState: any) => {
-                console.log(prevState,2)
+                console.log(prevState)
                 const update = [...prevState]
+                notification.forEach((element: any) => {
+                    console.log(element)
                     const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
-                    console.log(index)
-                    console.log(update[index])
-                //     update[index] = {...update[index], state: update[index].state + 1}
+                    console.log(update[index].state)
+                    update[index] = {...update[index], state: update[index].state + }
+                })
                 // return update
             })
         } else {

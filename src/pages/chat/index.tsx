@@ -79,15 +79,16 @@ const ChatHome = () => {
 
   useEffect(() => {
     socket.on('sendNotification', data => {
-        console.log(data)
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('chto to');
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
-            const audio = audioRef.current;
-            audio?.play().catch(() => {
-                console.log('nono')
-            })
+            if(document.hidden){
+                const audio = audioRef.current;
+                audio?.play().catch(() => {
+                    console.log('nono')
+                })
+            }
                 setNotification((prevState) => {
                     const newState = prevState + 1
                     return newState

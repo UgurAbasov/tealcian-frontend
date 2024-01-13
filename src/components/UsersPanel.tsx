@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
 
 const UserPanel = (props: any) => {
-    const [notification, setNotification] = useState<any>(props.notification)
+    const [notification, setNotification] = useState<any>(props.notification[props.key])
 
     useEffect(() => {
         console.log(notification)
-        console.log(props.key)
-        console.log(notification[props.key])
     })
 
     console.log(notification)
@@ -29,7 +27,7 @@ const UserPanel = (props: any) => {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
                 </svg> : ' '}
                 <p className=" text-[#686670] truncate text-[13px] w-[190px] ">{props.lastMassage}</p>
-                {notification[props.key].state > 0 && (
+                {0 > 0 && (
                     <div className=" bg-red-700 mt-auto mr-auto w-8 h-6 rounded-lg">{props.notification}</div>
                 )}
             </div>

@@ -64,7 +64,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     console.log('message');
-    socket.emit('join', props.data.privateId);
+    socket.emit('join', {privateId: props.data.privateId});
     socket.on('receiveMessage', data => {
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
@@ -111,7 +111,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
-      socket.emit('joinToAll', { targetId: 2178 });
+      socket.emit('joinToAll', { targetId: props.data.privateId });
   },[])
 
   const addMassage = () => {

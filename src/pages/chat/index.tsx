@@ -19,6 +19,7 @@ const ChatHome = () => {
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState(0)
   const [readyForData, setReadyForData] = useState(false)
+  const [isChannel, setIsChannel] = useState(false)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };

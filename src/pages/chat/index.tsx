@@ -106,14 +106,10 @@ const ChatHome = () => {
             const update = [...notification]
             console.log(update)
             notification.forEach((element: any) => {
-            console.log(element, 1)
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
-                console.log(index, 2)
-                console.log(update, 3)
-                update[index] = {...update[index], state: update[index].state}
+                update[index] = {...update[index], state: update[index].state++}
             });
             setNotification(update)
-            console.log(notification,4)
         } else {
           console.log('else');
           }

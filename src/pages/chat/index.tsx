@@ -104,14 +104,16 @@ const ChatHome = () => {
 
             setNotification((prevState: any) => {
                 console.log(prevState, 1)
-                return prevState.map((item: any) => {
+                const update: any[] = []
+                prevState.map((item: any) => {
                     console.log(item,2)
                   if (item.privateId === data.privateId) {
                     console.log(item, 3);
-                    return { ...item, state: item.state + 1 };
+                    update.push({ ...item, state: item.state + 1 });
                   }
-                  return item;
+                  update.push(item);
                 });
+                return update
               });
         } else {
           console.log('else');
@@ -119,6 +121,7 @@ const ChatHome = () => {
       }
     })
   }, [socket])
+  console.log(notification)
 
   return (
     <>

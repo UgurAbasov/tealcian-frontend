@@ -99,7 +99,7 @@ const ChatHome = () => {
         }
       }
     });
-  }, [socket])
+  }, [socket, currentData])
 
   return (
     <>

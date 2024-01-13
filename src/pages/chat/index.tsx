@@ -104,7 +104,6 @@ const ChatHome = () => {
                 }) 
             }
             const update = [...notification]
-            console.log(update)
             notification.forEach((element: any) => {
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
                 update[index] = {...update[index], state: update[index].state + 1}

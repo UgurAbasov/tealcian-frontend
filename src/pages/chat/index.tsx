@@ -57,9 +57,8 @@ const ChatHome = () => {
             setReadyForData(true)
             console.log(result.objectArr)
             result.objectArr.forEach((value: any) => {
-                console.log(value,1)
-        //    const updateNotification = [...notification]
-        //     updateNotification.push({state: 0, privateId: value.})
+           const updateNotification = [...notification]
+            updateNotification.push({state: 0, privateId: value.privateId})
             })
           } else {
             setLoadingData(true);
@@ -117,6 +116,8 @@ const ChatHome = () => {
       }
     })
   }, [socket])
+
+  console.log(notification)
 
   return (
     <>

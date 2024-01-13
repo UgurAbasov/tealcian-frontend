@@ -19,6 +19,7 @@ const ChatHome = () => {
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState<any>([])
   const [readyForData, setReadyForData] = useState(false)
+  const [limit, setLimit] = useState(true)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -103,18 +104,22 @@ const ChatHome = () => {
             console.log(notification)
             const update = [...notification]
             console.log(update,2)
-            notification.forEach((element: any) => {
-                const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
-                console.log(update[index].state)
-                update[index] = {...update[index], state: update[index].state}
-            })
-            setNotification(update)
+            if(notification.length !== 0){
+                notification.forEach((element: any) => {
+                    const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.privateId)
+                    console.log(update[index].state)
+                    update[index] = {...update[index], state: update[index].state }
+                })
+                setNotification(update)
+            } else {
+                setLimit(false)
+            }
         } else {
           console.log('else');
           }
       }
     })
-  }, [socket, notification])
+  }, [socket, limit])
 
   return (
     <>

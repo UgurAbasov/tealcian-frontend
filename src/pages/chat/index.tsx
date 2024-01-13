@@ -17,7 +17,10 @@ const ChatHome = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
-  const [notification, setNotification] = useState(0)
+  const [notification, setNotification] = useState({
+    state: 0,
+    roomId: 0
+  })
   const [readyForData, setReadyForData] = useState(false)
   const [isChannel, setIsChannel] = useState(false)
   const getChatData = (index: any) => {
@@ -78,15 +81,19 @@ const ChatHome = () => {
     }
   }, [readyForData])
 
-  console.log(currentData, 1)
+  useEffect(() => {
+    console.log(currentData)
+  }, [currentData])
 
 
   useEffect(() => {
-    console.log(currentData, 2)
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {
         console.log('halo')
-        setNotification(0)
+        setNotification({
+            roomId: data.privateId,
+            state: 0
+        })
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')){
             if(!document.hasFocus()){
@@ -96,7 +103,10 @@ const ChatHome = () => {
                 })
             }
                 setNotification((prevState) => {
-                    const newState = prevState + 1
+                    const newState = {
+                        roomId: data.privateId,
+                        state: prevState.state++
+                    }
                     return newState
                 })
         } else {

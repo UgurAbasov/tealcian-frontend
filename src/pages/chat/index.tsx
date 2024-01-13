@@ -17,7 +17,7 @@ const ChatHome = () => {
   const [loadingData, setLoadingData] = useState(false);
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
-  const [notification, setNotification] = useState(0)
+  const [notification, setNotification] = useState<any>([])
   const [readyForData, setReadyForData] = useState(false)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
@@ -55,6 +55,11 @@ const ChatHome = () => {
             setLoadingData(true);
             setAllChats(result.objectArr);
             setReadyForData(true)
+            result.objectArr.forEach((value: any) => {
+                console.log(value)
+        //    const updateNotification = [...notification]
+        //     updateNotification.push({state: 0, privateId: value.})
+            })
           } else {
             setLoadingData(true);
             setNoUsers(false);
@@ -79,9 +84,13 @@ const ChatHome = () => {
 
   useEffect(() => {
     if (localStorage.getItem('isChannel') === 'true') {
-        setNotification(0)
+        notification.forEach((value: any) => {
+            console.log(value)
+        })
     }
-  })
+  }, [currentData])
+
+  console.log(notification)
 
   
   useEffect(() => {
@@ -92,18 +101,21 @@ const ChatHome = () => {
                 const audio = audioRef.current;
                 audio?.play().catch(() => {
                     console.log('nono')
-                })
+                }) 
             }
-                setNotification((prevState) => {
-                    const newState = prevState + 1
-                    return newState
-                })
+
+            notification.forEach((element: any) => {
+                const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.private)
+                const update = [...notification]
+                update[index] = {...update[index], state: update[index].state}
+                setNotification(update)
+            });
         } else {
           console.log('else');
           }
       }
-    });
-  }, [socket, currentData])
+    })
+  }, [socket])
 
   return (
     <>

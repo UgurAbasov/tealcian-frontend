@@ -97,13 +97,13 @@ const ChatHome = () => {
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') !== 'true') {
         if (data.userId.toString() !== localStorage.getItem('userId')){
+            console.log(1)
             if(!document.hasFocus()){
                 const audio = audioRef.current;
                 audio?.play().catch(() => {
                     console.log('nono')
                 }) 
             }
-
             notification.forEach((element: any) => {
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.private)
                 const update = [...notification]

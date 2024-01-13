@@ -73,6 +73,7 @@ const ChatHome = () => {
     }
     getPrivates();
   }, []);
+  console.log(notification)
 
   useEffect(() => {
     if(readyForData){

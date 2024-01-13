@@ -104,21 +104,22 @@ const ChatHome = () => {
                     console.log('nono')
                 }) 
             }
+            const update = [...notification]
             notification.forEach((element: any) => {
+            console.log(element)
                 const index = notification.findIndex((item: { privateId: any; }) => item.privateId === data.private)
-                const update = [...notification]
+                console.log(index)
+                console.log(update)
                 update[index] = {...update[index], state: update[index].state}
-                setNotification(update)
             });
+            setNotification(update)
+            console.log(notification)
         } else {
           console.log('else');
           }
       }
     })
   }, [socket, currentData])
-
-  console.log(notification)
-
   return (
     <>
       <audio ref={audioRef}>

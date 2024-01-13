@@ -80,10 +80,7 @@ const ChatHome = () => {
   useEffect(() => {
     socket.on('sendNotification', data => {
       if (localStorage.getItem('isChannel') === 'true') {
-        setNotification((prevState) => {
-            const newState = prevState + 1
-            return newState
-        })
+        setNotification(0)
       } else {
         if (data.userId.toString() !== localStorage.getItem('userId')) {
             if(!document.hasFocus()){

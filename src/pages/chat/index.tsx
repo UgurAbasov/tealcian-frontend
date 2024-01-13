@@ -73,7 +73,6 @@ const ChatHome = () => {
     }
     getPrivates();
   }, []);
-  console.log(notification)
 
   useEffect(() => {
     if(readyForData){
@@ -120,7 +119,7 @@ const ChatHome = () => {
           }
       }
     })
-  }, [socket, currentData])
+  }, [socket, notification])
   return (
     <>
       <audio ref={audioRef}>

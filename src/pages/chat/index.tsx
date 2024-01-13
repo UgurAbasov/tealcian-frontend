@@ -55,8 +55,9 @@ const ChatHome = () => {
             setLoadingData(true);
             setAllChats(result.objectArr);
             setReadyForData(true)
+            console.log(result.objectArr)
             result.objectArr.forEach((value: any) => {
-                console.log(value)
+                console.log(value,1)
         //    const updateNotification = [...notification]
         //     updateNotification.push({state: 0, privateId: value.})
             })
@@ -90,7 +91,7 @@ const ChatHome = () => {
     }
   }, [currentData])
 
-  console.log(notification)
+
 
   
   useEffect(() => {

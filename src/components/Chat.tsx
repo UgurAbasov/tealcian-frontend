@@ -200,12 +200,7 @@ const Chat = (props: any) => {
         <h1 className=' text-[20px] ml-10 my-2'>{props.data.user}</h1>
       </div>
       <hr className='h-[2px] border-gray-500 my-3' />
-      <div className=' h-full overflow-y-auto' onContextMenu={handleContextMenu} ref={scrollableDivRef}>
-      {isContextMenuVisible && (
-        <ContextMenu
-        position={contextMenuPosition}
-        />
-      )}
+      <div className=' h-full overflow-y-auto' ref={scrollableDivRef}>
         {massages.map((value: any, ind: any) => (
           <div key={ind}>
             <div className='flex justify-center items-center'>
@@ -213,7 +208,14 @@ const Chat = (props: any) => {
                 <p className=' px-3 py-1 text-[13px]'>{value.time}</p>
               </div>
             </div>
+
             {value.data.map((msg: any, msgIndex: any) => (
+              <>
+                {isContextMenuVisible && (
+                  <ContextMenu
+                    position={contextMenuPosition}
+                  />
+                )}
               <MassageModel
                 key={msgIndex}
                 user={msg.userName}
@@ -221,6 +223,7 @@ const Chat = (props: any) => {
                 time={msg.time}
                 own={msg.own}
               />
+              </>
             ))}
           </div>
         ))}

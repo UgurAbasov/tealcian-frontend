@@ -19,6 +19,7 @@ const ChatHome = () => {
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState<any>([])
   const [readyForData, setReadyForData] = useState(false)
+  const [lastMassage, setLastMassage] = useState<any>([])
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -97,6 +98,11 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
+        
+        // setLastMassage((prevState: any) => {
+        //     const update = [...prevState]
+            
+        // })
       if (localStorage.getItem('isChannel') !== 'true') {
         if (data.userId.toString() !== localStorage.getItem('userId')){
             if(!document.hasFocus()){

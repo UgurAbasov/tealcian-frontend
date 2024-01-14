@@ -25,7 +25,6 @@ const Chat = (props: any) => {
   const [isContextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
   const [selectedMessageIndex, setSelectedMessageIndex] = useState<any>();
-  const [currentTimeIndex, setCurrentTimeIndex] = useState<any>()
 
   const handleContextMenu = (event: any, msgIndex: any) => {
     event.preventDefault();
@@ -37,9 +36,11 @@ const Chat = (props: any) => {
   const deleteMessage = () => {
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      update[currentTimeIndex].data.splice(selectedMessageIndex, 1)
+      update[0].data.splice(selectedMessageIndex, 1)
+      console.log(update[0].data[selectedMessageIndex])
       return update
     })
+    // socket.emit('deleteMessage', {})
   }
 
 
@@ -54,6 +55,12 @@ const Chat = (props: any) => {
   useEffect(() => {
     setMassages([]);
   }, [props.data.privateId]);
+
+  useEffect(() => {
+    // socket.on('deleteMessage', (data) => {
+    //   setMassages(data)
+    // })
+  }, [socket])
 
   useEffect(() => {
     if (scrollableDivRef.current) {
@@ -233,7 +240,6 @@ const Chat = (props: any) => {
                   massage={msg.body}
                   time={msg.time}
                   own={msg.own}
-                  onSomething={() => setCurrentTimeIndex(ind)}
                   onClick={() => setSelectedMessageIndex(msgIndex)}
                 />
               </div>

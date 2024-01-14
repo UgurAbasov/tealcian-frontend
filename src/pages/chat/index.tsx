@@ -106,10 +106,10 @@ const ChatHome = () => {
                 console.log(prevState, 1)
                 const update = [...prevState]
                 const index = prevState.findIndex((item: any) =>{
+                    console.log(item,2)
+                    console.log(data,3)
                      item.privateId === data.privateId
                 })
-                console.log(index, 2)
-                console.log(update[index], 3)
                 // update[index] = {privateId: update[index].privateId, state: update[index].state + 1}
                 return update
               });

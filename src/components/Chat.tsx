@@ -45,6 +45,11 @@ const Chat = (props: any) => {
     })
   }
 
+  const CollectFunctions = (firstId: any, secondId: any) => {
+    setSelectedMessageIndex(firstId)
+    setCurrentTimeIndex(secondId)
+  }
+
   const handleCloseContextMenu = () => {
     setContextMenuVisible(false);
   };
@@ -216,13 +221,13 @@ const Chat = (props: any) => {
       <hr className='h-[2px] border-gray-500 my-3' />
       <div className=' h-full overflow-y-auto' ref={scrollableDivRef}>
         {massages.map((value: any, ind: any) => (
-          <div key={ind} onClick={() => setCurrentTimeIndex(ind)}>
+          <div key={ind}>
             <div className='flex justify-center items-center'>
               <div className=' bg-[#D9D9D9] rounded-lg '>
                 <p className=' px-3 py-1 text-[13px]'>{value.time}</p>
               </div>
             </div>
-        {value.data.map((msg: any, msgIndex: any) => (
+    {value.data.map((msg: any, msgIndex: any) => (
   <div key={msgIndex} onContextMenu={(e) => handleContextMenu(e, msgIndex)}>
     {selectedMessageIndex === msgIndex && isContextMenuVisible && (
       <ContextMenu
@@ -236,7 +241,7 @@ const Chat = (props: any) => {
       massage={msg.body}
       time={msg.time}
       own={msg.own}
-      onClick={() => setSelectedMessageIndex(msgIndex)}
+      onClick={() => CollectFunctions(msgIndex, ind)}
     />
   </div>
 ))}

@@ -36,8 +36,8 @@ const Chat = (props: any) => {
   const deleteMessage = () => {
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      update[0].data.splice(selectedMessageIndex, 1)
       socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
+      update[0].data.splice(selectedMessageIndex, 1)
       return update
     })
   }

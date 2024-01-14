@@ -22,7 +22,7 @@ const Chat = (props: any) => {
   const scrollableDivRef = useRef<HTMLDivElement>(null);
   const [isContextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
-  const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState<any>();
 
 
   const handleContextMenu = (event: any, msgIndex: any) => {
@@ -31,6 +31,16 @@ const Chat = (props: any) => {
     setContextMenuPosition({ x: event.clientX, y: event.clientY });
     setContextMenuVisible(true);
   };
+
+  const deleteMessage = () => {
+    setMassages((prevState: any) => {
+      const update: YourStateArrayType = [...prevState]
+      console.log(update)
+      console.log(selectedMessageIndex)
+      console.log(update[selectedMessageIndex])
+      return update
+    })
+  }
 
   const handleCloseContextMenu = () => {
     setContextMenuVisible(false);
@@ -216,7 +226,6 @@ const Chat = (props: any) => {
     {selectedMessageIndex === msgIndex && isContextMenuVisible && (
       <ContextMenu
         position={contextMenuPosition}
-        // Pass any additional props you need
       />
     )}
     <MassageModel
@@ -226,6 +235,7 @@ const Chat = (props: any) => {
       time={msg.time}
       own={msg.own}
       onClick={() => setSelectedMessageIndex(msgIndex)}
+      onMessage={deleteMessage}
     />
   </div>
 ))}

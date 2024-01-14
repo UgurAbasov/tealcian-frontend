@@ -105,9 +105,7 @@ const ChatHome = () => {
             setNotification((prevState: any) => {
                 console.log(prevState, 1)
                 const update = [...prevState]
-                const index = prevState.findIndex((item: any) =>{
-                     item.privateId === data.privateId
-                })
+                const index = update.findIndex((item) => item.privateId === data.privateId)
                 console.log(index)
                 // update[index] = {privateId: update[index].privateId, state: update[index].state + 1}
                 return update

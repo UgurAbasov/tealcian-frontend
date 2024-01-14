@@ -83,11 +83,15 @@ const ChatHome = () => {
     }
   }, [readyForData])
 
+
   useEffect(() => {
     if (localStorage.getItem('isChannel') === 'true') {
-        notification.map((value: any) => {
-            console.log(value)
-        })
+     setNotification((prevState: any) => {
+        const update = [...prevState]
+        const index = notification.findIndex((item: any) => item.privateId === (currentData as any)?.privateId);
+        update[index] = {privateId: update[index].privateId, state: 0}
+        return update
+     })
     }
   }, [currentData])
   

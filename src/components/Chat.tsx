@@ -237,7 +237,7 @@ const Chat = (props: any) => {
                   massage={msg.body}
                   time={msg.time}
                   own={msg.own}
-                  onSomething={() => setCurrentTimeIndex(2)}
+                  onSomething={() => setCurrentTimeIndex(ind)}
                   onClick={() => setSelectedMessageIndex(msgIndex)}
                 />
               </div>

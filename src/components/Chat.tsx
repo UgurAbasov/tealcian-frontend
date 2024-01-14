@@ -38,9 +38,9 @@ const Chat = (props: any) => {
     console.log(massages,1)
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      console.log(update,2)
+      console.log(update[0],2)
       console.log(selectedMessageIndex,3)
-      console.log(update.data[selectedMessageIndex],4)
+      console.log(update[0].data[selectedMessageIndex],4)
       return update
     })
   }

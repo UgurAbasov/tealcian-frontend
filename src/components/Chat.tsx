@@ -37,10 +37,10 @@ const Chat = (props: any) => {
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
       update[0].data.splice(selectedMessageIndex, 1)
-      console.log(update[0].data[selectedMessageIndex])
+      if(localStorage.getItem('userId'))
+      socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
       return update
     })
-    // socket.emit('deleteMessage', {})
   }
 
 
@@ -57,9 +57,9 @@ const Chat = (props: any) => {
   }, [props.data.privateId]);
 
   useEffect(() => {
-    // socket.on('deleteMessage', (data) => {
-    //   setMassages(data)
-    // })
+    socket.on('deleteMessage', (data) => {
+      console.log(data)
+    })
   }, [socket])
 
   useEffect(() => {

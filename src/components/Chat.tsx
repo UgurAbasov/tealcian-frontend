@@ -56,12 +56,6 @@ const Chat = (props: any) => {
   }, [props.data.privateId]);
 
   useEffect(() => {
-    socket.on('deleteMessage', (data) => {
-      console.log(data,1)
-    })
-  }, [socket])
-
-  useEffect(() => {
     if (scrollableDivRef.current) {
       scrollableDivRef.current.scrollTo({
         top: scrollableDivRef.current.scrollHeight + 50,
@@ -95,8 +89,10 @@ const Chat = (props: any) => {
   }, [props.data.privateId]);
 
   useEffect(() => {
-    console.log('message');
     socket.emit('join', { privateId: props.data.privateId });
+    socket.on('deleteMessage', (data) => {
+      console.log(data,10)
+    })
     socket.on('receiveMessage', data => {
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];

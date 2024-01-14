@@ -111,6 +111,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
+    console.log()
     socket.emit('joinToAll', { targetId: props.data.privateId });
   },[])
 
@@ -122,7 +123,7 @@ const Chat = (props: any) => {
         message: inputValue,
         targetType: 'private',
       });
-      socket.emit('sendNotification', {roomId: 2178, refreshToken: localStorage.getItem('refreshToken'), message: inputValue});
+      socket.emit('sendNotification', {roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue});
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const currentDate = new Date();

@@ -22,10 +22,12 @@ const Chat = (props: any) => {
   const scrollableDivRef = useRef<HTMLDivElement>(null);
   const [isContextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState(null);
 
 
-  const handleContextMenu = (event: any) => {
+  const handleContextMenu = (event: any, msgIndex: any) => {
     event.preventDefault();
+    setSelectedMessageIndex(msgIndex);
     setContextMenuPosition({ x: event.clientX, y: event.clientY });
     setContextMenuVisible(true);
   };
@@ -209,22 +211,24 @@ const Chat = (props: any) => {
               </div>
             </div>
 
-            {value.data.map((msg: any, msgIndex: any) => (
-              <div key={msgIndex} onContextMenu={handleContextMenu}>
-                {isContextMenuVisible && (
-                  <ContextMenu
-                    position={contextMenuPosition}
-                  />
-                )}
-              <MassageModel
-                key={msgIndex}
-                user={msg.userName}
-                massage={msg.body}
-                time={msg.time}
-                own={msg.own}
-              />
-              </div>
-            ))}
+        {value.data.map((msg: any, msgIndex: any) => (
+  <div key={msgIndex} onContextMenu={(e) => handleContextMenu(e, msgIndex)}>
+    {selectedMessageIndex === msgIndex && isContextMenuVisible && (
+      <ContextMenu
+        position={contextMenuPosition}
+        // Pass any additional props you need
+      />
+    )}
+    <MassageModel
+      key={msgIndex}
+      user={msg.userName}
+      massage={msg.body}
+      time={msg.time}
+      own={msg.own}
+      onClick={() => setSelectedMessageIndex(msgIndex)}
+    />
+  </div>
+))}
           </div>
         ))}
       </div>

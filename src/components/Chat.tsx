@@ -210,7 +210,7 @@ const Chat = (props: any) => {
             </div>
 
             {value.data.map((msg: any, msgIndex: any) => (
-              <div onContextMenu={handleContextMenu}>
+              <div key={msgIndex} onContextMenu={handleContextMenu}>
                 {isContextMenuVisible && (
                   <ContextMenu
                     position={contextMenuPosition}

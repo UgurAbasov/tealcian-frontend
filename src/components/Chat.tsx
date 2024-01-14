@@ -226,6 +226,7 @@ const Chat = (props: any) => {
     {selectedMessageIndex === msgIndex && isContextMenuVisible && (
       <ContextMenu
         position={contextMenuPosition}
+        onMessage={deleteMessage}
       />
     )}
     <MassageModel
@@ -235,7 +236,6 @@ const Chat = (props: any) => {
       time={msg.time}
       own={msg.own}
       onClick={() => setSelectedMessageIndex(msgIndex)}
-      onMessage={deleteMessage}
     />
   </div>
 ))}

@@ -37,11 +37,9 @@ const Chat = (props: any) => {
   const deleteMessage = () => {
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      console.log(currentTimeIndex)
-      console.log(selectedMessageIndex)
-      // console.log(update[0], 2)
-      // console.log(selectedMessageIndex, 3)
-      // console.log(update[0].data[selectedMessageIndex], 4)
+      console.log(update[currentTimeIndex])
+      console.log(update[currentTimeIndex].data)
+      console.log(update[currentTimeIndex].data)
       return update
     })
   }

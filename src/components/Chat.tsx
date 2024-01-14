@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import MassageModel from './MassageModel';
 import io from 'socket.io-client';
 import getCurrentDate from '@/utils/formatTime';
-
+import ContextMenu from './ContextMenu';
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
 interface YourStateType {
@@ -20,6 +20,20 @@ const Chat = (props: any) => {
   const [inputValue, setInputValue] = useState('');
   const [massages, setMassages] = useState<YourStateArrayType>([]);
   const scrollableDivRef = useRef<HTMLDivElement>(null);
+  const [isContextMenuVisible, setContextMenuVisible] = useState(false);
+  const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
+
+
+  const handleContextMenu = (event: any) => {
+    event.preventDefault();
+    setContextMenuPosition({ x: event.clientX, y: event.clientY });
+    setContextMenuVisible(true);
+  };
+
+  const handleCloseContextMenu = () => {
+    setContextMenuVisible(false);
+  };
+
   const onChange = (event: any) => {
     setInputValue(event.currentTarget.value);
   };
@@ -162,7 +176,7 @@ const Chat = (props: any) => {
   };
 
   return (
-    <div className=' flex flex-col  h-screen'>
+    <div onClick={handleCloseContextMenu} className=' flex flex-col  h-screen'>
       <div className=' flex mt-[24px] mb-[18px] ml-6'>
         <button className='hidden third hover:bg-gray-300 rounded-lg cursor-pointer w-[40px] h-[40px] mt-auto mb-auto mr-5'>
           <svg
@@ -186,7 +200,12 @@ const Chat = (props: any) => {
         <h1 className=' text-[20px] ml-10 my-2'>{props.data.user}</h1>
       </div>
       <hr className='h-[2px] border-gray-500 my-3' />
-      <div className=' h-full overflow-y-auto' ref={scrollableDivRef}>
+      <div className=' h-full overflow-y-auto' onContextMenu={handleContextMenu} ref={scrollableDivRef}>
+      {isContextMenuVisible && (
+        <ContextMenu
+        position={contextMenuPosition}
+        />
+      )}
         {massages.map((value: any, ind: any) => (
           <div key={ind}>
             <div className='flex justify-center items-center'>

@@ -19,7 +19,6 @@ const ChatHome = () => {
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState<any>([])
   const [readyForData, setReadyForData] = useState(false)
-  const [limit, setLimit] = useState(true)
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -119,7 +118,6 @@ const ChatHome = () => {
       }
     })
   }, [socket])
-  console.log(notification)
 
   return (
     <>

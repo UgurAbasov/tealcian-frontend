@@ -60,7 +60,7 @@ const Chat = (props: any) => {
     socket.on('deleteMessage', (data) => {
       console.log(data)
     })
-  }, [socket])
+  }, [massages])
 
   useEffect(() => {
     if (scrollableDivRef.current) {

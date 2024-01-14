@@ -25,7 +25,7 @@ const Chat = (props: any) => {
   const [isContextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
   const [selectedMessageIndex, setSelectedMessageIndex] = useState<any>();
-
+  const [currentTimeIndex, setCurrentTimeIndex] = useState<any>()
 
   const handleContextMenu = (event: any, msgIndex: any) => {
     event.preventDefault();
@@ -38,9 +38,9 @@ const Chat = (props: any) => {
     console.log(massages,1)
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      console.log(update[0],2)
+      console.log(update[currentTimeIndex],2)
       console.log(selectedMessageIndex,3)
-      console.log(update[0].data[selectedMessageIndex],4)
+      console.log(update[currentTimeIndex].data[selectedMessageIndex],4)
       return update
     })
   }
@@ -127,15 +127,14 @@ const Chat = (props: any) => {
         }
 
         return updatedData;
-      });
-    });
-  }, [socket]);
+      })
+    })
+  }, [socket])
 
   const handleKeyBoard = (event: any) => {
-    if (event.key === 'Enter') {
-      addMassage();
+    if (event.key === 'Enter'){
+            addMassage();
     }
-
   };
 
   useEffect(() => {
@@ -217,13 +216,12 @@ const Chat = (props: any) => {
       <hr className='h-[2px] border-gray-500 my-3' />
       <div className=' h-full overflow-y-auto' ref={scrollableDivRef}>
         {massages.map((value: any, ind: any) => (
-          <div key={ind}>
+          <div key={ind} onClick={() => setCurrentTimeIndex(ind)}>
             <div className='flex justify-center items-center'>
               <div className=' bg-[#D9D9D9] rounded-lg '>
                 <p className=' px-3 py-1 text-[13px]'>{value.time}</p>
               </div>
             </div>
-
         {value.data.map((msg: any, msgIndex: any) => (
   <div key={msgIndex} onContextMenu={(e) => handleContextMenu(e, msgIndex)}>
     {selectedMessageIndex === msgIndex && isContextMenuVisible && (

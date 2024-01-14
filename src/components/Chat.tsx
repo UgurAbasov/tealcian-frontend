@@ -40,7 +40,7 @@ const Chat = (props: any) => {
       update[currentTimeIndex].data.splice(selectedMessageIndex, 1)
       return update
     })
-  }.
+  }
 
 
   const handleCloseContextMenu = () => {

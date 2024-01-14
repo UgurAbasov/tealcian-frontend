@@ -111,7 +111,7 @@ const Chat = (props: any) => {
           own: 1,
           time: data.time,
           userName: data.userName,
-        };
+        }
         const currentDate = new Date();
         const day = String(currentDate.getDate()).padStart(2, '0');
         const month = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -245,7 +245,7 @@ const Chat = (props: any) => {
       massage={msg.body}
       time={msg.time}
       own={msg.own}
-      onClick={() => CollectFunctions(msgIndex, ind)}
+      onClick={CollectFunctions(msgIndex, ind)}
     />
   </div>
 ))}

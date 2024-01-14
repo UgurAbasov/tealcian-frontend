@@ -5,6 +5,7 @@ const MassageModel = (props: any) => {
 const [time, setTime] = useState('')
 
 useEffect(() => {
+    props.onClick()
   const dateObject = new Date(props.time);
   const timeString = dateObject.toLocaleTimeString('en-US', {
     hour: '2-digit',

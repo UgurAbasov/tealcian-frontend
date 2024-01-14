@@ -14,7 +14,9 @@ interface YourStateType {
   }>;
 }
 
-interface YourStateArrayType extends Array<YourStateType> {}
+interface YourStateArrayType extends Array<YourStateType> {
+  [x: string]: any;
+}
 
 const Chat = (props: any) => {
   const [inputValue, setInputValue] = useState('');
@@ -33,11 +35,12 @@ const Chat = (props: any) => {
   };
 
   const deleteMessage = () => {
+    console.log(massages,1)
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      console.log(update)
-      console.log(selectedMessageIndex)
-      console.log(update[selectedMessageIndex])
+      console.log(update,2)
+      console.log(selectedMessageIndex,3)
+      console.log(update.data[selectedMessageIndex],4)
       return update
     })
   }

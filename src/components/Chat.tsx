@@ -37,12 +37,10 @@ const Chat = (props: any) => {
   const deleteMessage = () => {
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      console.log(update[currentTimeIndex])
-      console.log(update[currentTimeIndex].data)
-      console.log(update[currentTimeIndex].data)
+      update[currentTimeIndex].data.splice(selectedMessageIndex, 1)
       return update
     })
-  }
+  }.
 
 
   const handleCloseContextMenu = () => {

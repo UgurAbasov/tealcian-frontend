@@ -74,6 +74,7 @@ const ChatHome = () => {
     getPrivates();
   }, []);
 
+
   useEffect(() => {
     if(readyForData){
         for(let i = 0; i < allChats.length; i++){

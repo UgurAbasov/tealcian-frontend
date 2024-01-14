@@ -45,6 +45,7 @@ const Chat = (props: any) => {
     })
   }
 
+
   const handleCloseContextMenu = () => {
     setContextMenuVisible(false);
   };

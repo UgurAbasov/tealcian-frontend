@@ -51,6 +51,7 @@ const Chat = (props: any) => {
   const CollectFunctions = (firstId: any, secondId: any) => {
     setSelectedMessageIndex(firstId)
     setCurrentTimeIndex(secondId)
+    console.log(secondId)
   }
 
   const handleCloseContextMenu = () => {

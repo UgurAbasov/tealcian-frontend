@@ -57,7 +57,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     socket.on('deleteMessage', (data) => {
-      console.log(data)
+      console.log(data,1)
     })
   }, [socket])
 
@@ -88,7 +88,6 @@ const Chat = (props: any) => {
       );
       const data = response.json();
       data.then(result => {
-        console.log(result);
         setMassages(result);
       });
     };

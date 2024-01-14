@@ -46,10 +46,6 @@ const Chat = (props: any) => {
     })
   }
 
-  const collect = (msq: any,index: any) => {
-  setSelectedMessageIndex(msq)
-  setCurrentTimeIndex(index)
-  }
 
   const handleCloseContextMenu = () => {
     setContextMenuVisible(false);
@@ -241,7 +237,8 @@ const Chat = (props: any) => {
                   massage={msg.body}
                   time={msg.time}
                   own={msg.own}
-                  onClick={() => collect(msgIndex,ind)}
+                  onSomething={() => setCurrentTimeIndex(ind)}
+                  onClick={() => setSelectedMessageIndex(msgIndex)}
                 />
               </div>
             ))}

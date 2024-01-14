@@ -35,23 +35,14 @@ const Chat = (props: any) => {
   };
 
   const deleteMessage = () => {
-    // console.log(massages,1)
+    console.log(massages, 1)
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
-      console.log(update,1)
-      console.log(currentTimeIndex,2)
-      console.log(selectedMessageIndex)
-      // console.log(update[currentTimeIndex],2)
-      // console.log(selectedMessageIndex,3)
-      // console.log(update[currentTimeIndex].data[selectedMessageIndex],4)
+      console.log(update[0], 2)
+      console.log(selectedMessageIndex, 3)
+      console.log(update[0].data[selectedMessageIndex], 4)
       return update
     })
-  }
-
-  const CollectFunctions = (firstId: any, secondId: any) => {
-    setSelectedMessageIndex(firstId)
-    setCurrentTimeIndex(secondId)
-    console.log(secondId)
   }
 
   const handleCloseContextMenu = () => {
@@ -69,7 +60,7 @@ const Chat = (props: any) => {
   useEffect(() => {
     if (scrollableDivRef.current) {
       scrollableDivRef.current.scrollTo({
-        top: scrollableDivRef.current.scrollHeight+50,
+        top: scrollableDivRef.current.scrollHeight + 50,
         behavior: 'smooth',
       });
     }
@@ -102,7 +93,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     console.log('message');
-    socket.emit('join', {privateId: props.data.privateId});
+    socket.emit('join', { privateId: props.data.privateId });
     socket.on('receiveMessage', data => {
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
@@ -111,7 +102,7 @@ const Chat = (props: any) => {
           own: 1,
           time: data.time,
           userName: data.userName,
-        }
+        };
         const currentDate = new Date();
         const day = String(currentDate.getDate()).padStart(2, '0');
         const month = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -141,16 +132,15 @@ const Chat = (props: any) => {
   }, [socket])
 
   const handleKeyBoard = (event: any) => {
-    if (event.key === 'Enter'){
-            addMassage();
+    if (event.key === 'Enter') {
+      addMassage();
     }
   };
 
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
-    console.log()
     socket.emit('joinToAll', { targetId: props.data.privateId });
-  },[])
+  }, [])
 
   const addMassage = () => {
     if (inputValue.length > 0) {
@@ -160,7 +150,7 @@ const Chat = (props: any) => {
         message: inputValue,
         targetType: 'private',
       });
-      socket.emit('sendNotification', {roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue});
+      socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const currentDate = new Date();
@@ -231,24 +221,24 @@ const Chat = (props: any) => {
                 <p className=' px-3 py-1 text-[13px]'>{value.time}</p>
               </div>
             </div>
-    {value.data.map((msg: any, msgIndex: any) => (
-  <div key={msgIndex} onContextMenu={(e) => handleContextMenu(e, msgIndex)}>
-    {selectedMessageIndex === msgIndex && isContextMenuVisible && (
-      <ContextMenu
-        position={contextMenuPosition}
-        onMessage={deleteMessage}
-      />
-    )}
-    <MassageModel
-      key={msgIndex}
-      user={msg.userName}
-      massage={msg.body}
-      time={msg.time}
-      own={msg.own}
-      onClick={CollectFunctions(msgIndex, ind)}
-    />
-  </div>
-))}
+            {value.data.map((msg: any, msgIndex: any) => (
+              <div key={msgIndex} onContextMenu={(e) => handleContextMenu(e, msgIndex)}>
+                {selectedMessageIndex === msgIndex && isContextMenuVisible && (
+                  <ContextMenu
+                    position={contextMenuPosition}
+                    onMessage={deleteMessage}
+                  />
+                )}
+                <MassageModel
+                  key={msgIndex}
+                  user={msg.userName}
+                  massage={msg.body}
+                  time={msg.time}
+                  own={msg.own}
+                  onClick={() => setSelectedMessageIndex(msgIndex)}
+                />
+              </div>
+            ))}
           </div>
         ))}
       </div>

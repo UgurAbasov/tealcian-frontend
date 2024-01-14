@@ -35,7 +35,6 @@ const Chat = (props: any) => {
   };
 
   const deleteMessage = () => {
-    console.log(massages, 1)
     setMassages((prevState: any) => {
       const update: YourStateArrayType = [...prevState]
       console.log(currentTimeIndex)
@@ -47,8 +46,9 @@ const Chat = (props: any) => {
     })
   }
 
-  const collect = () => {
-
+  const collect = (msq: any,index: any) => {
+  setSelectedMessageIndex(msq)
+  setCurrentTimeIndex(index)
   }
 
   const handleCloseContextMenu = () => {
@@ -241,7 +241,7 @@ const Chat = (props: any) => {
                   massage={msg.body}
                   time={msg.time}
                   own={msg.own}
-                  onClick={() => setSelectedMessageIndex(msgIndex)}
+                  onClick={() => collect(msgIndex,ind)}
                 />
               </div>
             ))}

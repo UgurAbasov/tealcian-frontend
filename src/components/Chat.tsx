@@ -85,15 +85,13 @@ const Chat = (props: any) => {
     fetching();
   }, [props.data.privateId]);
 
-  props.socket.on('receiveForUser', (data: any) => {
-    console.log(data,1)
-  })
-
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
       console.log(data)
     })
-    console.log('yes')
+    props.socket.on('receiveForUser', (data: any) => {
+      console.log(data,1)
+    })
     props.socket.on('receiveMessage', (data: any) => {
       console.log(data)
       // setMassages(prevMassages => {

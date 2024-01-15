@@ -90,7 +90,7 @@ const Chat = (props: any) => {
   useEffect(() => {
     socket.emit('join', { privateId: props.data.privateId });
     socket.on('deleteMessage', (data) => {
-      setMassages(data)
+      console.log(data)
     })
     socket.on('receiveMessage', data => {
       setMassages(prevMassages => {

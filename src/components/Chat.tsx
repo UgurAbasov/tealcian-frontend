@@ -93,38 +93,38 @@ const Chat = (props: any) => {
     console.log('yes')
     props.socket.on('receiveMessage', (data: any) => {
       console.log(data)
-      setMassages(prevMassages => {
-        const updatedData = [...prevMassages];
-        const newObj = {
-          body: data.body,
-          own: 1,
-          time: data.time,
-          userName: data.userName,
-        };
-        const currentDate = new Date();
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const year = currentDate.getFullYear();
+      // setMassages(prevMassages => {
+      //   const updatedData = [...prevMassages];
+      //   const newObj = {
+      //     body: data.body,
+      //     own: 1,
+      //     time: data.time,
+      //     userName: data.userName,
+      //   };
+      //   const currentDate = new Date();
+      //   const day = String(currentDate.getDate()).padStart(2, '0');
+      //   const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      //   const year = currentDate.getFullYear();
 
-        const DataObject = {
-          time: `${month}/${day}/${year}`,
-          data: [newObj],
-        };
+      //   const DataObject = {
+      //     time: `${month}/${day}/${year}`,
+      //     data: [newObj],
+      //   };
 
-        let bol = false;
-        for (let i = 0; i < prevMassages.length; i++) {
-          if (prevMassages[i].time === getCurrentDate()) {
-            bol = true;
-            prevMassages[i].data.push(newObj);
-            break;
-          }
-        }
-        if (!bol) {
-          updatedData.push(DataObject);
-        }
+      //   let bol = false;
+      //   for (let i = 0; i < prevMassages.length; i++) {
+      //     if (prevMassages[i].time === getCurrentDate()) {
+      //       bol = true;
+      //       prevMassages[i].data.push(newObj);
+      //       break;
+      //     }
+      //   }
+      //   if (!bol) {
+      //     updatedData.push(DataObject);
+      //   }
 
-        return updatedData;
-      })
+      //   return updatedData;
+      // })
     })
   }, [props.socket])
 
@@ -147,6 +147,9 @@ const Chat = (props: any) => {
         targetType: 'private',
       })
       props.socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
+      props.socket.on('receiveMessage', (data: any) => {
+        console.log(data)
+      })
       setInputValue('');
     }
   };

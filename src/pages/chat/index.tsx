@@ -79,7 +79,7 @@ const ChatHome = () => {
   useEffect(() => {
     if(readyForData){
         for(let i = 0; i < allChats.length; i++){
-            socket.emit('joinToAll', { targetId: allChats[i].privateId });
+            socket.emit('joinToAll', { targetId: allChats[i].privateId, userId: localStorage.getItem('userId')});
         }
     }
   }, [readyForData])

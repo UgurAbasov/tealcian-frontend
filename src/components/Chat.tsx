@@ -94,7 +94,7 @@ const Chat = (props: any) => {
         const updatedData = [...prevMassages];
         const newObj = {
           body: data.body,
-          own: 1,
+          own: data.own,
           time: data.time,
           userName: data.userName,
         };

@@ -137,6 +137,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
+    socket.emit('joinToAll', { targetId: props.data.privateId });
   }, [])
 
   const addMassage = () => {
@@ -146,9 +147,9 @@ const Chat = (props: any) => {
         refreshToken: localStorage.getItem('refreshToken'),
         message: inputValue,
         targetType: 'private',
-      });
+      })
       socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
-      socket.on('addMessage', data => {
+      socket.on('receiveMessage', data => {
         console.log(data)
         setMassages(prevMassages => {
           const updatedData = [...prevMassages];

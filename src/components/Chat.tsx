@@ -157,7 +157,7 @@ const Chat = (props: any) => {
         const messageObject = {
           body: inputValue,
           own: 0,
-          time: new Date().toString(),
+          time: new Date().toISOString(),
           userName: 'Ugur',
         };
         const DataObject = {

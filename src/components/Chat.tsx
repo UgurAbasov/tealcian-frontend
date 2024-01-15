@@ -86,7 +86,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
-      console.log(data)
+      setMassages(data)
     })
     props.socket.on('receiveMessage', (data: any) => {
       setMassages(prevMassages => {

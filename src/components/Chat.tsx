@@ -34,11 +34,8 @@ const Chat = (props: any) => {
   };
 
   const deleteMessage = () => {
-    setMassages((prevState: any) => {
-      const update: YourStateArrayType = [...prevState]
+      const update: YourStateArrayType = [...massages]
       socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
-      return update
-    })
   }
 
 
@@ -119,7 +116,6 @@ const Chat = (props: any) => {
             break;
           }
         }
-
         if (!bol) {
           updatedData.push(DataObject);
         }

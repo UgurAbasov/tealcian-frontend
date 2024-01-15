@@ -128,7 +128,7 @@ const Chat = (props: any) => {
         return updatedData;
       })
     })
-  }, [])
+  }, [socket])
 
   const handleKeyBoard = (event: any) => {
     if (event.key === 'Enter') {

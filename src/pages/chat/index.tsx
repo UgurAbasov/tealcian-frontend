@@ -98,11 +98,6 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
-        
-        // setLastMassage((prevState: any) => {
-        //     const update = [...prevState]
-            
-        // })
       if (localStorage.getItem('isChannel') !== 'true') {
         if (data.userId.toString() !== localStorage.getItem('userId')){
             if(!document.hasFocus()){
@@ -123,6 +118,9 @@ const ChatHome = () => {
           console.log('else');
           }
       }
+    })
+    socket.on('receiveMessage', (data) => {
+      console.log(data)
     })
   }, [socket])
 

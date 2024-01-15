@@ -3,7 +3,6 @@ import MassageModel from './MassageModel';
 import io from 'socket.io-client';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
-const socket = io('https://tealcian-backend-production.up.railway.app');
 
 interface YourStateType {
   time: string;
@@ -88,12 +87,12 @@ const Chat = (props: any) => {
   }, [props.data.privateId]);
 
   useEffect(() => {
-    socket.emit('join', { privateId: props.data.privateId });
-    socket.on('deleteMessage', (data) => {
+    props.socket.emit('join', { privateId: props.data.privateId });
+    props.socket.on('deleteMessage', (data: any) => {
       console.log(data)
     })
     console.log('yes')
-    socket.on('receiveMessage', data => {
+    props.socket.on('receiveMessage', (data: any) => {
       console.log(data)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
@@ -128,7 +127,7 @@ const Chat = (props: any) => {
         return updatedData;
       })
     })
-  }, [socket])
+  }, [props.socket])
 
   const handleKeyBoard = (event: any) => {
     if (event.key === 'Enter') {
@@ -138,19 +137,19 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
-    socket.emit('joinToAll', { targetId: props.data.privateId });
+    props.socket.emit('joinToAll', { targetId: props.data.privateId });
   }, [])
 
   const addMassage = () => {
     if (inputValue.length > 0) {
-      socket.emit('addMessage', {
+      props.socket.emit('addMessage', {
         targetId: props.data.privateId,
         refreshToken: localStorage.getItem('refreshToken'),
         message: inputValue,
         targetType: 'private',
       })
-      socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
-      socket.on('receiveMessage', data => {
+      props.socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
+      props.socket.on('receiveMessage', (data: any) => {
         console.log(data)
         setMassages(prevMassages => {
           const updatedData = [...prevMassages];

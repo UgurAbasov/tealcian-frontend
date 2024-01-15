@@ -253,7 +253,7 @@ const ChatHome = () => {
             )}
           </div>
           <div className='second w-[70%]'>
-            {currentData ? <Chat data={currentData} /> : <p>Click to users</p>}
+            {currentData ? <Chat data={currentData} socket={socket} /> : <p>Click to users</p>}
           </div>
         </div>
       )}

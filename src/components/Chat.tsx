@@ -36,7 +36,7 @@ const Chat = (props: any) => {
       console.log(update[0])
       console.log(update[0].data[selectedMessageIndex].time)
       console.log(update[0].data[selectedMessageIndex])
-      // socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
+      props.socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
   }
 
 

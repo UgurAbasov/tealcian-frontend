@@ -39,10 +39,6 @@ const Chat = (props: any) => {
       // socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
   }
 
-  props.socket.on('receiveMessage', (data: any) => {
-    console.log(data)
-  })
-
 
   const handleCloseContextMenu = () => {
     setContextMenuVisible(false);

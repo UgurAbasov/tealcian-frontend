@@ -85,6 +85,10 @@ const Chat = (props: any) => {
     fetching();
   }, [props.data.privateId]);
 
+  props.socket.on('receiveForUser', (data: any) => {
+    console.log(data,1)
+  })
+
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
       console.log(data)

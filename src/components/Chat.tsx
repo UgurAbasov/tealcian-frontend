@@ -148,6 +148,40 @@ const Chat = (props: any) => {
         targetType: 'private',
       });
       socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
+      socket.on('receiveMessage', data => {
+        setMassages(prevMassages => {
+          const updatedData = [...prevMassages];
+          const newObj = {
+            body: data.body,
+            own: 1,
+            time: data.time,
+            userName: data.userName,
+          };
+          const currentDate = new Date();
+          const day = String(currentDate.getDate()).padStart(2, '0');
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const year = currentDate.getFullYear();
+  
+          const DataObject = {
+            time: `${month}/${day}/${year}`,
+            data: [newObj],
+          };
+  
+          let bol = false;
+          for (let i = 0; i < prevMassages.length; i++) {
+            if (prevMassages[i].time === getCurrentDate()) {
+              bol = true;
+              prevMassages[i].data.push(newObj);
+              break;
+            }
+          }
+          if (!bol) {
+            updatedData.push(DataObject);
+          }
+  
+          return updatedData;
+        })
+      })
       setInputValue('');
     }
   };

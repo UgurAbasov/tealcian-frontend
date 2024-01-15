@@ -24,7 +24,6 @@ const Chat = (props: any) => {
   const [isContextMenuVisible, setContextMenuVisible] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
   const [selectedMessageIndex, setSelectedMessageIndex] = useState<any>();
-  const [dataValue, setDataValue] = useState(true)
   const handleContextMenu = (event: any, msgIndex: any) => {
     event.preventDefault();
     setSelectedMessageIndex(msgIndex);
@@ -126,7 +125,7 @@ const Chat = (props: any) => {
       //   return updatedData;
       // })
     })
-  }, [props.socket, dataValue])
+  }, [props.socket]) 
 
   const handleKeyBoard = (event: any) => {
     if (event.key === 'Enter') {
@@ -147,7 +146,6 @@ const Chat = (props: any) => {
         targetType: 'private',
       })
       props.socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
-      setDataValue(false)
       setInputValue('');
     }
   };

@@ -92,6 +92,7 @@ const Chat = (props: any) => {
     socket.on('deleteMessage', (data) => {
       console.log(data)
     })
+    console.log('yes')
     socket.on('receiveMessage', data => {
       console.log(data)
       setMassages(prevMassages => {
@@ -127,7 +128,7 @@ const Chat = (props: any) => {
         return updatedData;
       })
     })
-  }, [socket])
+  }, [])
 
   const handleKeyBoard = (event: any) => {
     if (event.key === 'Enter') {

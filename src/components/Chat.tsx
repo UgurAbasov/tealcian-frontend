@@ -93,6 +93,7 @@ const Chat = (props: any) => {
       console.log(data)
     })
     socket.on('receiveMessage', data => {
+      console.log(data)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const newObj = {

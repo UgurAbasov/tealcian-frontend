@@ -149,6 +149,7 @@ const Chat = (props: any) => {
       });
       socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
       socket.on('receiveMessage', data => {
+        console.log(data)
         setMassages(prevMassages => {
           const updatedData = [...prevMassages];
           const newObj = {

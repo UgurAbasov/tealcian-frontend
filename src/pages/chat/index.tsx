@@ -6,7 +6,7 @@ import checkAuth from '@/utils/checkAuth';
 import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
-import { createDecipheriv, createHash, randomBytes } from 'crypto';
+import { createDecipher, createDecipheriv, createHash, randomBytes } from 'crypto';
 
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
@@ -52,13 +52,12 @@ const ChatHome = () => {
       const data = response.json();
       data.then(result => {
         if (result.objectArr){
-          const key = randomBytes(32);
-        const iv = randomBytes(16);
-        const decipher = createDecipheriv('aes-256-cbc', key, iv);
-        let decryptedData = decipher.update(result.objectArr, 'hex', 'utf-8');
-        decryptedData += decipher.final('utf-8');
-        const dataArray = JSON.parse(decryptedData);
-console.log(dataArray)
+          const key = 'themost';
+          const algorithm = 'aes-256-cbc';
+          const decipher = createDecipher(algorithm, key);
+          let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
+          decrypted += decipher.final('utf8');
+          console.log(decrypted);
           // if (result.objectArr.length > 0) {
           //   setLoadingData(true);
           //   setAllChats(result.objectArr);

@@ -52,10 +52,7 @@ const ChatHome = () => {
       data.then(result => {
         if (result.objectArr){
           const encryptedBuffer = Buffer.from(result.objectArr, 'base64');
-const clientPrivateKey = result.PRP;
-
-// Use the private key received from the server
-const privateKeyData = new TextEncoder().encode(clientPrivateKey);
+const privateKeyData = new TextEncoder().encode('P2P');
 
 window.crypto.subtle.importKey(
     'pkcs8',

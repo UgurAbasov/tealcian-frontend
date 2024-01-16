@@ -52,7 +52,7 @@ const ChatHome = () => {
       data.then(result => {
         if (result.objectArr){
           const encryptedBuffer = Buffer.from(result.objectArr, 'base64');
-const privateKeyData = new TextEncoder().encode('PPP');
+const privateKeyData = new TextEncoder().encode('something');
 
 window.crypto.subtle.importKey(
     'pkcs8',

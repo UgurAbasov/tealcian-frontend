@@ -25,7 +25,7 @@ useEffect(() => {
     } else {
         return (
             <div className=" flex flex-col justify-start items-start mt-6 ml-[10px]">
-                <div className=" bg-white max-w-[250px] break-words rounded-xl">
+                <div className=" bg-gray-950 max-w-[250px] break-words rounded-xl">
                     <h1 className=" px-2 py-2">{props.massage}
                     </h1>
                 </div>

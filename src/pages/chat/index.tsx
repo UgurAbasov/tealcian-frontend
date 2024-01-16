@@ -57,20 +57,20 @@ const ChatHome = () => {
           const decipher = createDecipher(algorithm, key);
           let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
           decrypted += decipher.final('utf8');
-          console.log(decrypted);
-          // if (result.objectArr.length > 0) {
-          //   setLoadingData(true);
-          //   setAllChats(result.objectArr);
-          //   setReadyForData(true)
-          //   const updateNotification = [...notification]
-          //   result.objectArr.forEach((value: any) => {
-          //   updateNotification.push({state: 0, privateId: value.privateId})
-          //   })
-          //   setNotification(updateNotification)
-          // } else {
-          //   setLoadingData(true);
-          //   setNoUsers(false);
-          // }
+          const gotResult = JSON.parse(decrypted)
+          if (gotResult.length > 0) {
+            setLoadingData(true);
+            setAllChats(gotResult);
+            setReadyForData(true)
+            const updateNotification = [...notification]
+            result.objectArr.forEach((value: any) => {
+            updateNotification.push({state: 0, privateId: value.privateId})
+            })
+            setNotification(updateNotification)
+          } else {
+            setLoadingData(true);
+            setNoUsers(false);
+          }
         } else {
           if (result.length < 0) {
             setNoUsers(false);

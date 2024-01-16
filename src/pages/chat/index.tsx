@@ -6,6 +6,7 @@ import checkAuth from '@/utils/checkAuth';
 import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
+import { createHash } from 'crypto';
 
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
@@ -51,31 +52,9 @@ const ChatHome = () => {
       const data = response.json();
       data.then(result => {
         if (result.objectArr){
-          const encryptedBuffer = Buffer.from(result.objectArr, 'base64');
-const privateKeyData = new TextEncoder().encode('something');
-
-window.crypto.subtle.importKey(
-    'pkcs8',
-    privateKeyData,
-    { name: 'RSA-OAEP', hash: 'SHA-256' },
-    true,
-    ['decrypt']
-)
-    .then((importedKey) => {
-        return window.crypto.subtle.decrypt(
-            { name: 'RSA-OAEP' },
-            importedKey,
-            encryptedBuffer
-        );
-    })
-    .then((decryptedBuffer) => {
-        const decryptedData = new TextDecoder().decode(new Uint8Array(decryptedBuffer));
-        const receivedArray = JSON.parse(decryptedData);
-        console.log(receivedArray);
-    })
-    .catch((error) => {
-        console.error('Decryption error:', error);
-    });
+          const receivedDataString = JSON.stringify(result.objectArr);
+          const clientHash = createHash('sha256').update(receivedDataString).digest('hex');
+          console.log(clientHash)
           // if (result.objectArr.length > 0) {
           //   setLoadingData(true);
           //   setAllChats(result.objectArr);

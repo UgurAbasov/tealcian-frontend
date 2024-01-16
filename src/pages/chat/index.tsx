@@ -19,7 +19,6 @@ const ChatHome = () => {
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState<any>([])
   const [readyForData, setReadyForData] = useState(false)
-  const [lastMassage, setLastMassage] = useState<any>([])
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
@@ -52,19 +51,42 @@ const ChatHome = () => {
       const data = response.json();
       data.then(result => {
         if (result.objectArr){
-          if (result.objectArr.length > 0) {
-            setLoadingData(true);
-            setAllChats(result.objectArr);
-            setReadyForData(true)
-            const updateNotification = [...notification]
-            result.objectArr.forEach((value: any) => {
-            updateNotification.push({state: 0, privateId: value.privateId})
-            })
-            setNotification(updateNotification)
-          } else {
-            setLoadingData(true);
-            setNoUsers(false);
-          }
+          const encryptedBuffer = Buffer.from(result.objectArr, 'base64')
+          crypto.subtle.importKey(
+            'pkcs8',
+            new TextEncoder().encode('something'),
+            { name: 'RSA-OAEP', hash: 'SHA-256' },
+            true,
+            ['decrypt']
+        )
+        .then((importedKey) => {
+            return crypto.subtle.decrypt(
+                { name: 'RSA-OAEP' },
+                importedKey,
+                encryptedBuffer
+            );
+        })
+        .then((decryptedBuffer) => {
+            const decryptedData = new TextDecoder().decode(decryptedBuffer);
+            const receivedArray = JSON.parse(decryptedData);
+            console.log(receivedArray)
+        })
+        .catch((error) => {
+            console.error('Decryption error:', error);
+        });
+          // if (result.objectArr.length > 0) {
+          //   setLoadingData(true);
+          //   setAllChats(result.objectArr);
+          //   setReadyForData(true)
+          //   const updateNotification = [...notification]
+          //   result.objectArr.forEach((value: any) => {
+          //   updateNotification.push({state: 0, privateId: value.privateId})
+          //   })
+          //   setNotification(updateNotification)
+          // } else {
+          //   setLoadingData(true);
+          //   setNoUsers(false);
+          // }
         } else {
           if (result.length < 0) {
             setNoUsers(false);
@@ -263,3 +285,7 @@ const ChatHome = () => {
   );
 };
 export default ChatHome;
+
+function encryptedData(encryptedData: any, arg1: string) {
+  throw new Error('Function not implemented.');
+}

@@ -51,29 +51,32 @@ const ChatHome = () => {
       const data = response.json();
       data.then(result => {
         if (result.objectArr){
-          const encryptedBuffer = Buffer.from(result.objectArr, 'base64')
-          crypto.subtle.importKey(
-            'pkcs8',
-            new TextEncoder().encode('something'),
-            { name: 'RSA-OAEP', hash: 'SHA-256' },
-            true,
-            ['decrypt']
-        )
-        .then((importedKey) => {
-            return crypto.subtle.decrypt(
-                { name: 'RSA-OAEP' },
-                importedKey,
-                encryptedBuffer
-            );
-        })
-        .then((decryptedBuffer) => {
-            const decryptedData = new TextDecoder().decode(decryptedBuffer);
-            const receivedArray = JSON.parse(decryptedData);
-            console.log(receivedArray)
-        })
-        .catch((error) => {
-            console.error('Decryption error:', error);
-        });
+          const encryptedBuffer = Buffer.from(result.objectArr, 'base64');
+const clientPrivateKey = result.PRP;
+const privateKeyData = new TextEncoder().encode(clientPrivateKey);
+
+window.crypto.subtle.importKey(
+    'pkcs8',
+    privateKeyData,
+    { name: 'RSA-OAEP', hash: 'SHA-256' },
+    true,
+    ['decrypt']
+)
+    .then((importedKey) => {
+        return window.crypto.subtle.decrypt(
+            { name: 'RSA-OAEP' },
+            importedKey,
+            encryptedBuffer
+        );
+    })
+    .then((decryptedBuffer) => {
+        const decryptedData = new TextDecoder().decode(new Uint8Array(decryptedBuffer));
+        const receivedArray = JSON.parse(decryptedData);
+        console.log(receivedArray);
+    })
+    .catch((error) => {
+        console.error('Decryption error:', error);
+    });
           // if (result.objectArr.length > 0) {
           //   setLoadingData(true);
           //   setAllChats(result.objectArr);

@@ -148,7 +148,7 @@ const Chat = (props: any) => {
   };
 
   return (
-    <div onClick={handleCloseContextMenu} className=' flex flex-col  h-screen'>
+    <div onClick={handleCloseContextMenu} className='chat flex flex-col  h-screen'>
       <div className=' flex mt-[24px] mb-[18px] ml-6'>
         <button className='hidden third hover:bg-gray-300 rounded-lg cursor-pointer w-[40px] h-[40px] mt-auto mb-auto mr-5'>
           <svg

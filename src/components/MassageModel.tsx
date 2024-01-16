@@ -13,6 +13,8 @@ useEffect(() => {
   })
   setTime(timeString)
 }, [])
+console.log(props.own)
+console.log(Number(localStorage.getItem('userId')))
 
 
     if(props.own === Number(localStorage.getItem('userId'))){

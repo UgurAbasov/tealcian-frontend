@@ -196,12 +196,13 @@ const Chat = (props: any) => {
                   own={msg.own}
                   onClick={() => setSelectedMessageIndex(msgIndex)}
                 /> 
+                
               </div>
             ))}
           </div>
         ))}
       </div>
-      <div className=' flex justify-center items-center p-2 w-full '>
+      <div className=' flex justify-center items-center p-2 w-full bg-g'>
         <input
           type='text'
           value={inputValue}

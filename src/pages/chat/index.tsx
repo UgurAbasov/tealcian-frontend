@@ -174,6 +174,7 @@ const ChatHome = () => {
               <div className=' flex mt-3 mb-1'>
                 <h1 className='text-[20px] mt-1 '>Chats</h1>
                 <svg
+                onClick={() => router.push('/chat/create')}
                   className='hover:bg-blue-700  bg-blue-500 ml-[120px] mr-[10px] text-white w-8 h-8 p-[6px] rounded-lg hover:cursor-pointer dark:text-white'
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'
@@ -182,6 +183,7 @@ const ChatHome = () => {
                   <path d='M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z' />
                 </svg>
                 <svg
+                onClick={() => router.push('/chat/profile')}
                   className=' w-8 h-8 p-[6px] hover:cursor-pointer hover:bg-blue-700 bg-blue-500 rounded-lg text-white  dark:text-white'
                   aria-hidden='true'
                   xmlns='http://www.w3.org/2000/svg'

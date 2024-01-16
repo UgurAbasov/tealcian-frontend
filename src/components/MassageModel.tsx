@@ -15,7 +15,7 @@ useEffect(() => {
 }, [])
 
 
-    if(props.own === 1){
+    if(props.own === Number(localStorage.getItem('userId'))){
         return ( <div className=" flex flex-col justify-end items-end mt-6 mr-[10px]">
         <div className=" bg-blue-500 max-w-[250px] break-words rounded-xl ">
             <h1 className=" px-2 py-2">{props.massage}

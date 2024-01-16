@@ -195,7 +195,7 @@ const Chat = (props: any) => {
                   time={msg.time}
                   own={msg.own}
                   onClick={() => setSelectedMessageIndex(msgIndex)}
-                />
+                /> 
               </div>
             ))}
           </div>

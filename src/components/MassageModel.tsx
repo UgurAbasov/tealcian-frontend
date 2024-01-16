@@ -13,9 +13,6 @@ useEffect(() => {
   })
   setTime(timeString)
 }, [])
-console.log(props.own)
-console.log(Number(localStorage.getItem('userId')))
-
 
     if(props.own === Number(localStorage.getItem('userId'))){
         return ( <div className=" flex flex-col justify-end items-end mt-6 mr-[10px]">

@@ -97,10 +97,9 @@ const Chat = (props: any) => {
       setMassages(data)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      receivedData = Buffer.concat([receivedData, data])
-      console.log(receivedData)
-      const objectString = receivedData.slice(0, -1).toString('utf-8')
-      const receivedObject = JSON.parse(objectString)
+      const textDecoder = new TextDecoder('utf-8');
+      const utf8Data = textDecoder.decode(data);
+      const receivedObject = JSON.parse(utf8Data)
       console.log(receivedObject)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];

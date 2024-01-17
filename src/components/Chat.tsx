@@ -94,13 +94,15 @@ const Chat = (props: any) => {
   useEffect(() => {
     let receivedData = Buffer.alloc(0);
     props.socket.on('deleteMessage', (data: any) => {
-      setMassages(data)
+    const textDecoder = new TextDecoder('utf-8');
+    const decodedJsonString = textDecoder.decode(data)
+    const decodedArray = JSON.parse(decodedJsonString);
+      setMassages(decodedArray)
     })
     props.socket.on('receiveMessage', (data: any) => {
       const textDecoder = new TextDecoder('utf-8');
       const utf8Data = textDecoder.decode(data);
       const receivedObject = JSON.parse(utf8Data)
-      console.log(receivedObject)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const newObj = {

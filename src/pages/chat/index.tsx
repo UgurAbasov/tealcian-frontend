@@ -53,9 +53,8 @@ const ChatHome = () => {
       data.then(result => {
         if (result.objectArr){
           const key = process.env.BASE_URL
-          console.log(key)
           const algorithm = 'aes-256-cbc'
-          const decipher = createDecipher(algorithm, 'themost');
+          const decipher = createDecipher(algorithm, key || '');
           let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
           decrypted += decipher.final('utf8');
           const gotResult = JSON.parse(decrypted)

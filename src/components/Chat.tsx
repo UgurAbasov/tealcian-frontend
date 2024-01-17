@@ -3,6 +3,7 @@ import MassageModel from './MassageModel';
 import io from 'socket.io-client';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
+import { createDecipher } from 'crypto';
 
 interface YourStateType {
   time: string;
@@ -78,24 +79,35 @@ const Chat = (props: any) => {
       );
       const data = response.json();
       data.then(result => {
-        setMassages(result);
+        const key = process.env.BASE_URL
+        const algorithm = 'aes-256-cbc'
+        const decipher = createDecipher(algorithm, key || '');
+        let decrypted = decipher.update(result, 'hex', 'utf8');
+        decrypted += decipher.final('utf8');
+        const gotResult = JSON.parse(decrypted)
+        setMassages(gotResult);
       });
     };
     fetching();
   }, [props.data.privateId]);
 
   useEffect(() => {
+    let receivedData = Buffer.alloc(0);
     props.socket.on('deleteMessage', (data: any) => {
       setMassages(data)
     })
     props.socket.on('receiveMessage', (data: any) => {
+      receivedData = Buffer.concat([receivedData, data])
+      const objectString = receivedData.slice(0, -1).toString('utf-8')
+      const receivedObject = JSON.parse(objectString)
+      console.log(receivedObject)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const newObj = {
-          body: data.body,
-          own: data.own,
-          time: data.time,
-          userName: data.userName,
+          body: receivedObject.body,
+          own: receivedObject.own,
+          time: receivedObject.time,
+          userName: receivedObject.userName,
         };
         const currentDate = new Date();
         const day = String(currentDate.getDate()).padStart(2, '0');

@@ -59,7 +59,7 @@ const ChatHome = () => {
           decrypted += decipher.final('utf8');
           const gotResult = JSON.parse(decrypted)
           if (gotResult.length > 0) {
-            setLoadingData(true);
+            setLoadingData(true)
             setAllChats(gotResult);
             setReadyForData(true)
             const updateNotification = [...notification]

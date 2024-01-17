@@ -100,6 +100,16 @@ const Chat = (props: any) => {
       setMassages(decodedArray)
     })
     props.socket.on('receiveMessage', (data: any) => {
+      const removePlaceholder = (message: any) => {
+        const match = message.match(/"(_placeholder)":true,"num":0/);
+        if (match) {
+          const startIndex = match.index;
+          const endIndex = startIndex + match[0].length;
+          return message.slice(0, startIndex) + message.slice(endIndex);
+        }
+        return message;
+      };
+      const actualData = removePlaceholder(data)
       const textDecoder = new TextDecoder('utf-8');
       const utf8Data = textDecoder.decode(data);
       const receivedObject = JSON.parse(utf8Data)

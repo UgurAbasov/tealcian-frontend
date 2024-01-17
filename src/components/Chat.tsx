@@ -85,7 +85,6 @@ const Chat = (props: any) => {
         let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
         decrypted += decipher.final('utf8');
         const gotResult = JSON.parse(decrypted)
-        console.log(gotResult)
         setMassages(gotResult);
       });
     };
@@ -99,10 +98,10 @@ const Chat = (props: any) => {
     })
     props.socket.on('receiveMessage', (data: any) => {
       receivedData = Buffer.concat([receivedData, data])
-      console.log(receivedData,1)
-      // const objectString = receivedData.slice(0, -1).toString('utf-8')
-      const receivedObject = JSON.parse('sd')
-      console.log(receivedObject,2)
+      console.log(receivedData)
+      const objectString = receivedData.slice(0, -1).toString('utf-8')
+      const receivedObject = JSON.parse(objectString)
+      console.log(receivedObject)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const newObj = {

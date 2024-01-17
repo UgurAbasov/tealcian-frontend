@@ -111,7 +111,7 @@ const Chat = (props: any) => {
       };
       const actualData = removePlaceholder(data)
       const textDecoder = new TextDecoder('utf-8');
-      const utf8Data = textDecoder.decode(data);
+      const utf8Data = textDecoder.decode(actualData);
       const receivedObject = JSON.parse(utf8Data)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];

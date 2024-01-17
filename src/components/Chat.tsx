@@ -84,6 +84,7 @@ const Chat = (props: any) => {
         const decipher = createDecipher(algorithm, key || '');
         let decrypted = decipher.update(result, 'hex', 'utf8');
         decrypted += decipher.final('utf8');
+        console.log(decrypted)
         const gotResult = JSON.parse(decrypted)
         console.log(gotResult)
         setMassages(gotResult);

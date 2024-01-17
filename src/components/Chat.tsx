@@ -82,9 +82,8 @@ const Chat = (props: any) => {
         const key = process.env.BASE_URL
         const algorithm = 'aes-256-cbc'
         const decipher = createDecipher(algorithm, key || '');
-        let decrypted = decipher.update(result, 'hex', 'utf8');
+        let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
         decrypted += decipher.final('utf8');
-        console.log(decrypted)
         const gotResult = JSON.parse(decrypted)
         console.log(gotResult)
         setMassages(gotResult);

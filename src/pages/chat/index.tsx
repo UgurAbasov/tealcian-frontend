@@ -52,13 +52,12 @@ const ChatHome = () => {
       const data = response.json();
       data.then(result => {
         if (result.objectArr){
-          const key = 'themost';
+          const key = process.env.KEY || ''
           const algorithm = 'aes-256-cbc';
           const decipher = createDecipher(algorithm, key);
           let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
           decrypted += decipher.final('utf8');
           const gotResult = JSON.parse(decrypted)
-          console.log(gotResult)
           if (gotResult.length > 0) {
             setLoadingData(true);
             setAllChats(gotResult);

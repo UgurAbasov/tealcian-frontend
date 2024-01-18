@@ -3,7 +3,6 @@ import MassageModel from './MassageModel';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
-import { customParser } from 'socket.io-json-parser';
 
 interface YourStateType {
   time: string;

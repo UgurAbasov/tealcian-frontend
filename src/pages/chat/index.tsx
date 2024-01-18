@@ -6,8 +6,9 @@ import checkAuth from '@/utils/checkAuth';
 import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
-import { createDecipher, createDecipheriv, createHash, randomBytes } from 'crypto';
-
+import { createDecipher } from 'crypto';
+// @ts-ignore
+import build from 'schemapack';
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
 const ChatHome = () => {
@@ -104,9 +105,12 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
-      const textDecoder = new TextDecoder('utf-8');
-      const utf8Data = textDecoder.decode(data);
-      const receivedObject = JSON.parse(utf8Data)
+      let resultObjSchema = build({
+        message: 'string',
+        userId: 'uint8',
+        privateId: 'uint8',
+    })
+    let receivedObject = resultObjSchema.decode(data)
       if (localStorage.getItem('isChannel') !== 'true') {
         if (receivedObject.userId.toString() !== localStorage.getItem('userId')){
             if(!document.hasFocus()){
@@ -127,9 +131,6 @@ const ChatHome = () => {
           console.log('else');
           }
       }
-    })
-    socket.on('receiveMessage', (data) => {
-      console.log(data)
     })
   }, [socket])
 

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import MassageModel from './MassageModel';
-import io from 'socket.io-client';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
-
+// @ts-ignore
+import build from 'schemapack';
 interface YourStateType {
   time: string;
   data: Array<{
@@ -92,17 +92,23 @@ const Chat = (props: any) => {
   }, [props.data.privateId]);
 
   useEffect(() => {
-    let receivedData = Buffer.alloc(0);
     props.socket.on('deleteMessage', (data: any) => {
-    const textDecoder = new TextDecoder('utf-8');
-    const decodedJsonString = textDecoder.decode(data)
-    const decodedArray = JSON.parse(decodedJsonString);
-      setMassages(decodedArray)
+      const resultArrSchema = build({
+        arrayResult: 'array'
+    })
+    let decodedArray = resultArrSchema.decode(data)
+    console.log(decodedArray)
+    setMassages(decodedArray)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      const textDecoder = new TextDecoder('utf-8');
-      const utf8Data = textDecoder.decode(data);
-      const receivedObject = JSON.parse(utf8Data)
+      let resultObjSchema = build({
+        body: 'string',
+        user: 'string',
+        own: 'uint8',
+        time: 'int64'
+    })
+    let receivedObject = resultObjSchema.decode(data)
+    console.log(receivedObject)
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const newObj = {

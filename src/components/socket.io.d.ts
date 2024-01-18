@@ -1,1 +1,1 @@
-declare module 'socket.io-json-parser'
+declare module 'schemapack'

@@ -3,7 +3,7 @@ import MassageModel from './MassageModel';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
-
+import {build} from 'schemapack'
 interface YourStateType {
   time: string;
   data: Array<{
@@ -95,7 +95,14 @@ const Chat = (props: any) => {
       console.log(data)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      console.log(data)
+      const resultObjSchema = build({
+        body: 'string',
+        user: 'string',
+        own: 'uint8',
+        time: 'int64'
+      });
+      let date = resultObjSchema.decode(data);
+      console.log(date)
       // setMassages(prevMassages => {
       //   const updatedData = [...prevMassages];
       //   const newObj = {

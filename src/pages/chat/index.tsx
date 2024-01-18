@@ -7,8 +7,6 @@ import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
-// @ts-ignore
-import schemapack from 'schemapack'
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
 const ChatHome = () => {
@@ -105,32 +103,27 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
-      let resultObjSchema = schemapack.build({
-        message: 'string',
-        userId: 'uint8',
-        privateId: 'uint8',
-    })
-    let receivedObject = resultObjSchema.decode(data)
-      if (localStorage.getItem('isChannel') !== 'true') {
-        if (receivedObject.userId.toString() !== localStorage.getItem('userId')){
-            if(!document.hasFocus()){
-                const audio = audioRef.current;
-                audio?.play().catch(() => {
-                    console.log('nono')
-                }) 
-            }
+// let receivedObject = {}
+      // if (localStorage.getItem('isChannel') !== 'true') {
+      //   if (receivedObject.userId.toString() !== localStorage.getItem('userId')){
+      //       if(!document.hasFocus()){
+      //           const audio = audioRef.current;
+      //           audio?.play().catch(() => {
+      //               console.log('nono')
+      //           }) 
+      //       }
 
-            setNotification((prevState: any) => {
-                console.log(prevState, 1)
-                const update = [...prevState]
-                const index = update.findIndex((item) => item.privateId === receivedObject.privateId)
-                update[index] = {privateId: update[index].privateId, state: update[index].state + 1}
-                return update
-              });
-        } else {
-          console.log('else');
-          }
-      }
+      //       setNotification((prevState: any) => {
+      //           console.log(prevState, 1)
+      //           const update = [...prevState]
+      //           const index = update.findIndex((item) => item.privateId === receivedObject.privateId)
+      //           update[index] = {privateId: update[index].privateId, state: update[index].state + 1}
+      //           return update
+      //         });
+      //   } else {
+      //     console.log('else');
+      //     }
+      // }
     })
 
   }, [socket])

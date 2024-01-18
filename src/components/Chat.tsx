@@ -3,8 +3,8 @@ import MassageModel from './MassageModel';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
-// @ts-ignore
-import schemapack from 'schemapack';
+import { customParser } from 'socket.io-json-parser';
+
 interface YourStateType {
   time: string;
   data: Array<{
@@ -93,54 +93,42 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
-      const resultArrSchema = schemapack.build({
-        arrayResult: 'array'
-    })
-    let decodedArray = resultArrSchema.decode(data)
-    console.log(decodedArray)
-    setMassages(decodedArray)
+      console.log(data)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      let resultObjSchema = schemapack.build({
-        body: 'string',
-        user: 'string',
-        own: 'uint8',
-        time: 'int64'
-    })
-    let receivedObject = resultObjSchema.decode(data)
-    console.log(receivedObject)
-      setMassages(prevMassages => {
-        const updatedData = [...prevMassages];
-        const newObj = {
-          body: receivedObject.body,
-          own: receivedObject.own,
-          time: receivedObject.time,
-          userName: receivedObject.userName,
-        };
-        const currentDate = new Date();
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const year = currentDate.getFullYear();
+      console.log(data)
+      // setMassages(prevMassages => {
+      //   const updatedData = [...prevMassages];
+      //   const newObj = {
+      //     body: receivedObject.body,
+      //     own: receivedObject.own,
+      //     time: receivedObject.time,
+      //     userName: receivedObject.userName,
+      //   };
+      //   const currentDate = new Date();
+      //   const day = String(currentDate.getDate()).padStart(2, '0');
+      //   const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      //   const year = currentDate.getFullYear();
 
-        const DataObject = {
-          time: `${month}/${day}/${year}`,
-          data: [newObj],
-        };
+      //   const DataObject = {
+      //     time: `${month}/${day}/${year}`,
+      //     data: [newObj],
+      //   };
 
-        let bol = false;
-        for (let i = 0; i < prevMassages.length; i++) {
-          if (prevMassages[i].time === getCurrentDate()) {
-            bol = true;
-            prevMassages[i].data.push(newObj);
-            break;
-          }
-        }
-        if (!bol) {
-          updatedData.push(DataObject);
-        }
+      //   let bol = false;
+      //   for (let i = 0; i < prevMassages.length; i++) {
+      //     if (prevMassages[i].time === getCurrentDate()) {
+      //       bol = true;
+      //       prevMassages[i].data.push(newObj);
+      //       break;
+      //     }
+      //   }
+      //   if (!bol) {
+      //     updatedData.push(DataObject);
+      //   }
 
-        return updatedData;
-      })
+      //   return updatedData;
+      // })
     })
   }, [props.socket]) 
 

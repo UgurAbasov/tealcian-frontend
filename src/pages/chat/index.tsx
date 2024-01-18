@@ -7,8 +7,7 @@ import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
-import { customParser } from 'socket.io-json-parser';
-const socket = io('https://tealcian-backend-production.up.railway.app', {parser: customParser});
+const socket = io('https://tealcian-backend-production.up.railway.app');
 
 const ChatHome = () => {
   const audioRef = useRef<HTMLAudioElement>(null);

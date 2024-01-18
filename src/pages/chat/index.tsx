@@ -8,7 +8,7 @@ import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
 // @ts-ignore
-import build from 'schemapack';
+import schemapack from 'schemapack'
 const socket = io('https://tealcian-backend-production.up.railway.app');
 
 const ChatHome = () => {
@@ -105,7 +105,7 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
-      let resultObjSchema = build({
+      let resultObjSchema = schemapack.build({
         message: 'string',
         userId: 'uint8',
         privateId: 'uint8',
@@ -132,6 +132,7 @@ const ChatHome = () => {
           }
       }
     })
+
   }, [socket])
 
   return (

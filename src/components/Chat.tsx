@@ -4,7 +4,7 @@ import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
 // @ts-ignore
-import build from 'schemapack';
+import schemapack from 'schemapack';
 interface YourStateType {
   time: string;
   data: Array<{
@@ -93,7 +93,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
-      const resultArrSchema = build({
+      const resultArrSchema = schemapack.build({
         arrayResult: 'array'
     })
     let decodedArray = resultArrSchema.decode(data)
@@ -101,7 +101,7 @@ const Chat = (props: any) => {
     setMassages(decodedArray)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      let resultObjSchema = build({
+      let resultObjSchema = schemapack.build({
         body: 'string',
         user: 'string',
         own: 'uint8',

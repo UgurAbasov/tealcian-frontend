@@ -99,7 +99,7 @@ const Chat = (props: any) => {
         body: 'string',
         user: 'string',
         own: 'uint8',
-        time: 'int64'
+        // time: 'int64'
       });
       let date = resultObjSchema.decode(data);
       console.log(date)

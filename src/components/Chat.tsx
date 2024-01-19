@@ -92,49 +92,53 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
-      console.log(data)
+      const resultObjSchema = build({
+        message: 'string',
+        userId: 'uint8',
+        privateId: 'uint8'
+      });
+      let buffer = resultObjSchema.encode(data);
+      setMassages(buffer.arrayResult)
     })
     props.socket.on('receiveMessage', (data: any) => {
       const resultObjSchema = build({
         body: 'string',
         user: 'string',
         own: 'uint8',
-        // time: 'int64'
+        time: 'string'
       });
-      let date = resultObjSchema.decode(data);
-      console.log(date)
-      // setMassages(prevMassages => {
-      //   const updatedData = [...prevMassages];
-      //   const newObj = {
-      //     body: receivedObject.body,
-      //     own: receivedObject.own,
-      //     time: receivedObject.time,
-      //     userName: receivedObject.userName,
-      //   };
-      //   const currentDate = new Date();
-      //   const day = String(currentDate.getDate()).padStart(2, '0');
-      //   const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-      //   const year = currentDate.getFullYear();
+      let receivedObject = resultObjSchema.decode(data);
+      setMassages(prevMassages => {
+        const updatedData = [...prevMassages];
+        const newObj = {
+          body: receivedObject.body,
+          own: receivedObject.own,
+          time: receivedObject.time,
+          userName: receivedObject.userName,
+        };
+        const currentDate = new Date();
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const year = currentDate.getFullYear();
 
-      //   const DataObject = {
-      //     time: `${month}/${day}/${year}`,
-      //     data: [newObj],
-      //   };
+        const DataObject = {
+          time: `${month}/${day}/${year}`,
+          data: [newObj],
+        };
 
-      //   let bol = false;
-      //   for (let i = 0; i < prevMassages.length; i++) {
-      //     if (prevMassages[i].time === getCurrentDate()) {
-      //       bol = true;
-      //       prevMassages[i].data.push(newObj);
-      //       break;
-      //     }
-      //   }
-      //   if (!bol) {
-      //     updatedData.push(DataObject);
-      //   }
-
-      //   return updatedData;
-      // })
+        let bol = false;
+        for (let i = 0; i < prevMassages.length; i++) {
+          if (prevMassages[i].time === getCurrentDate()) {
+            bol = true;
+            prevMassages[i].data.push(newObj);
+            break;
+          }
+        }
+        if (!bol) {
+          updatedData.push(DataObject);
+        }
+        return updatedData;
+      })
     })
   }, [props.socket]) 
 

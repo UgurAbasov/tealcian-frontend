@@ -7,8 +7,6 @@ import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
-import {build} from 'schemapack'
-import schemaPackParser from 'schemapack'
 
 const socket = io('https://tealcian-backend-production.up.railway.app')
 
@@ -106,14 +104,10 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
-      const resultObjSchema = build({
-        message: 'string',
-        userId: 'uint8',
-        privateId: 'uint8'
-      })
-      let buffer = resultObjSchema.encode(data);
-      if (localStorage.getItem('isChannel') !== 'true') {
-        if (buffer.userId.toString() !== localStorage.getItem('userId')){
+      let Data = data.toString('utf8')
+      let result = JSON.parse(Data)
+          if (localStorage.getItem('isChannel') !== 'true') {
+        if (result.userId.toString() !== localStorage.getItem('userId')){
             if(!document.hasFocus()){
                 const audio = audioRef.current;
                 audio?.play().catch(() => {
@@ -123,7 +117,7 @@ const ChatHome = () => {
             setNotification((prevState: any) => {
                 console.log(prevState, 1)
                 const update = [...prevState]
-                const index = update.findIndex((item) => item.privateId === buffer.privateId)
+                const index = update.findIndex((item) => item.privateId === result.privateId)
                 update[index] = {privateId: update[index].privateId, state: update[index].state + 1}
                 return update
               });

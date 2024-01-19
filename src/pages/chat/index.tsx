@@ -8,8 +8,9 @@ import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
 import {build} from 'schemapack'
+import schemaPackParser from 'schemapack'
 
-const socket = io('https://tealcian-backend-production.up.railway.app')
+const socket = io('https://tealcian-backend-production.up.railway.app', {parser: schemaPackParser})
 
 const ChatHome = () => {
   const audioRef = useRef<HTMLAudioElement>(null);

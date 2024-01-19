@@ -13,6 +13,8 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "10.4.15",
+    "blob": "^0.1.0",
+    "buffer": "^6.0.3",
     "crypto": "^1.0.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
@@ -25,6 +27,7 @@
     "schemapack": "^1.4.2",
     "socket.io-client": "^4.7.3",
     "socket.io-json-parser": "^3.0.0",
+    "socket.io-parser": "^4.2.4",
     "tailwindcss": "^3.3.3",
     "typescript": "5.2.2"
   }

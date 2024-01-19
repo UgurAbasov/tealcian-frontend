@@ -4,6 +4,8 @@ import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
 import {build} from 'schemapack'
+import socketIoParser from 'socket.io-parser'
+
 interface YourStateType {
   time: string;
   data: Array<{
@@ -101,44 +103,38 @@ const Chat = (props: any) => {
       setMassages(buffer.arrayResult)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      const resultObjSchema = build({
-        body: 'string',
-        user: 'string',
-        own: 'uint8',
-        time: 'string'
-      });
-      let receivedObject = resultObjSchema.decode(data);
-      setMassages(prevMassages => {
-        const updatedData = [...prevMassages];
-        const newObj = {
-          body: receivedObject.body,
-          own: receivedObject.own,
-          time: receivedObject.time,
-          userName: receivedObject.userName,
-        };
-        const currentDate = new Date();
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const year = currentDate.getFullYear();
+      console.log(data)
+      // setMassages(prevMassages => {
+      //   const updatedData = [...prevMassages];
+      //   const newObj = {
+      //     body: receivedObject.body,
+      //     own: receivedObject.own,
+      //     time: receivedObject.time,
+      //     userName: receivedObject.userName,
+      //   };
+      //   const currentDate = new Date();
+      //   const day = String(currentDate.getDate()).padStart(2, '0');
+      //   const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      //   const year = currentDate.getFullYear();
 
-        const DataObject = {
-          time: `${month}/${day}/${year}`,
-          data: [newObj],
-        };
+      //   const DataObject = {
+      //     time: `${month}/${day}/${year}`,
+      //     data: [newObj],
+      //   };
 
-        let bol = false;
-        for (let i = 0; i < prevMassages.length; i++) {
-          if (prevMassages[i].time === getCurrentDate()) {
-            bol = true;
-            prevMassages[i].data.push(newObj);
-            break;
-          }
-        }
-        if (!bol) {
-          updatedData.push(DataObject);
-        }
-        return updatedData;
-      })
+      //   let bol = false;
+      //   for (let i = 0; i < prevMassages.length; i++) {
+      //     if (prevMassages[i].time === getCurrentDate()) {
+      //       bol = true;
+      //       prevMassages[i].data.push(newObj);
+      //       break;
+      //     }
+      //   }
+      //   if (!bol) {
+      //     updatedData.push(DataObject);
+      //   }
+      //   return updatedData;
+      // })
     })
   }, [props.socket]) 
 

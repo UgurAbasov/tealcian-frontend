@@ -10,9 +10,7 @@ import { createDecipher } from 'crypto';
 import schemaPackParser from 'schemapack'
 
 
-const socket = io('https://tealcian-backend-production.up.railway.app', { 
-     parser: schemaPackParser,
-})
+const socket = io('https://tealcian-backend-production.up.railway.app')
 
 const ChatHome = () => {
   const audioRef = useRef<HTMLAudioElement>(null);

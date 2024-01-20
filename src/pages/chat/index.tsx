@@ -62,22 +62,24 @@ const ChatHome = () => {
           const gotResult = JSON.parse(decrypted)
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
-              
-              db.createObjectStore('First', { keyPath:'chats', autoIncrement: true })
+              console.log(db,)
+              const store = db.createObjectStore('First', { keyPath:'chats', autoIncrement: true })
+              // store.createIndex('privateIdIndex', 'privateId');
             }
           });
           const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            const index = store.index('privateId'); // Assuming 'privateId' is a property in your object
-            const existingData = await index.get(data.privateId);
-            if (!existingData) {
+            // const index = store.index('privateIdIndex');
+            // console.log(index)
+            // const existingData = await index.get(data.privateId);
+            // if (!existingData) {
               await store.add(data);
-              console.log('Data added successfully:', data);
-            } else {
-              console.log('Data with the same privateId already exists:', existingData);
-            }
+            //   console.log('Data added successfully:', data);
+            // } else {
+            //   console.log('Data with the same privateId already exists:', existingData);
+            // }
             await tx.done
           }
 
@@ -295,7 +297,3 @@ const ChatHome = () => {
   );
 };
 export default ChatHome;
-
-function encryptedData(encryptedData: any, arg1: string) {
-  throw new Error('Function not implemented.');
-}

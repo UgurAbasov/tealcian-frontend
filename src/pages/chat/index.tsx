@@ -60,30 +60,8 @@ const ChatHome = () => {
           let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
           decrypted += decipher.final('utf8');
           const gotResult = JSON.parse(decrypted)
-          const dbPromise = await openDB('chats', 1, {
-            upgrade(db) {
-              const store = db.createObjectStore('First', { keyPath:'privateId'})
-            }
-          });
-          const addObjectToDatabase = async (data: any) => {
-            const db = dbPromise;
-            const tx = db.transaction('First', 'readwrite')
-            const store = tx.objectStore('First');
-            const exist = await store.put(data)
-            console.log(exist,1)
-            // if(exist){
-            //   console.log(exist,2)
-            // } else {
-            //   store.add(data)
-            // }
-            await tx.done
-          }
 
           if (gotResult.length > 0) {
-             gotResult.forEach((value: any, index: any) => {
-              
-              addObjectToDatabase(value)
-            })
             setLoadingData(true)
             setAllChats(gotResult);
             setReadyForData(true)

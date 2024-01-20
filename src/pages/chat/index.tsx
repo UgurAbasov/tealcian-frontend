@@ -70,9 +70,7 @@ const ChatHome = () => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            console.log(data.privateId)
-            const existingData = await store.get(data.privateId);
-
+            const existingData = await store.get(data);
             if(!existingData){
               await store.add(data);
             } else {

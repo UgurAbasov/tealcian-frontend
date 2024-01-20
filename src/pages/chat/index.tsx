@@ -7,7 +7,7 @@ import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
-
+import {openDB} from 'idb'
 const socket = io('https://tealcian-backend-production.up.railway.app')
 
 const ChatHome = () => {
@@ -26,6 +26,8 @@ const ChatHome = () => {
 
   useEffect(() => {
     localStorage.removeItem('isChannel');
+    async function useDB() {
+    }
     async function fetching() {
       const data = await checkAuth().then(result => {
         if (result === 0) {
@@ -50,7 +52,7 @@ const ChatHome = () => {
         }
       );
       const data = response.json();
-      data.then(result => {
+      data.then(async result => {
         if (result.objectArr){
           const key = process.env.BASE_URL
           const algorithm = 'aes-256-cbc'
@@ -58,6 +60,14 @@ const ChatHome = () => {
           let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
           decrypted += decipher.final('utf8');
           const gotResult = JSON.parse(decrypted)
+          const dbPromise = await openDB('chats', 1, {
+            upgrade(db) {
+              gotResult.forEach((value: any) => {
+                db.createObjectStore(`First`, value.privateId)
+              })
+            }
+          });
+
           if (gotResult.length > 0) {
             setLoadingData(true)
             setAllChats(gotResult);

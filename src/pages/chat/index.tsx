@@ -62,8 +62,7 @@ const ChatHome = () => {
           const gotResult = JSON.parse(decrypted)
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
-              const store = db.createObjectStore('First', { keyPath:'chats', autoIncrement: true})
-              store.createIndex('privateIndex', 'privateId', { multiEntry: true });
+              const store = db.createObjectStore('First', { keyPath:'privateId'})
             }
           });
           const addObjectToDatabase = async (data: any) => {

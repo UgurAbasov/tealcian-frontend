@@ -71,7 +71,7 @@ const ChatHome = () => {
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
 
-            const existingData = await store.get(data.id);
+            const existingData = await store.get(data.privateId);
 
             if(!existingData){
               await store.add(data);

@@ -62,26 +62,22 @@ const ChatHome = () => {
           const gotResult = JSON.parse(decrypted)
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
-              const store = db.createObjectStore('First', { keyPath:'chats'})
-              store.createIndex('helloIndex', 'hello',  { unique: false })
+              const store = db.createObjectStore('First', { keyPath:'chats', autoIncrement: true})
+              store.createIndex('privateId', 'privateId', { unique: true });
             }
           });
           const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            const arr = store.index('helloIndex')
-            const keyRange = IDBKeyRange.only(false);
-
-            const cursor = await arr.openCursor(keyRange);
-            console.log(cursor)
-            // if (!result) {
-            //   await store.add(data);
-            //   console.log('Data added successfully:', data);
-            // } else {
-            //   console.log('Data with the same privateId already exists:', result);
-            // }
-            await tx.done
+            const exist = await store.get(data.privateId)
+            console.log(exist,1)
+            if(exist){
+              console.log(exist,2)
+            } else {
+              store.add(data)
+            }
+            await tx.done;
           }
 
           if (gotResult.length > 0) {

@@ -63,7 +63,7 @@ const ChatHome = () => {
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
               const store = db.createObjectStore('First', { keyPath:'chats', autoIncrement: true})
-              store.createIndex('privateId', 'privateId', { unique: true });
+              store.createIndex('privateIndex', 'privateId', { multiEntry: true });
             }
           });
           const addObjectToDatabase = async (data: any) => {
@@ -71,7 +71,7 @@ const ChatHome = () => {
             const tx = db.transaction('First', 'readwrite')
             const store = tx.objectStore('First');
             console.log(data.privateId)
-            const exist = await store.get(data.privateId)
+            const exist = await store.get(Number(data.privateId))
             console.log(exist,1)
             if(exist){
               console.log(exist,2)

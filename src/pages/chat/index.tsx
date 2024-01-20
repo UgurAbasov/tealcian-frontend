@@ -65,17 +65,17 @@ const ChatHome = () => {
               db.createObjectStore(`First`, { keyPath:'chats', autoIncrement: true })
             }
           });
-          const addObjectToDatabase = async (data: any) => {
+          const addObjectToDatabase = async (data: any, index: any) => {
             const db = dbPromise;
-            const tx = db.transaction('chats', 'readwrite');
-            const store = tx.objectStore('chats');
+            const tx = db.transaction(`id${index}`, 'readwrite');
+            const store = tx.objectStore(`id${index}`);
             await store.add(data);
             await tx.done;
           };
 
           if (gotResult.length > 0) {
-             gotResult.forEach((value: any) => {
-              addObjectToDatabase(value)
+             gotResult.forEach((value: any, index: any) => {
+              addObjectToDatabase(value, index)
             })
             setLoadingData(true)
             setAllChats(gotResult);

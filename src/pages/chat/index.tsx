@@ -63,13 +63,15 @@ const ChatHome = () => {
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
               const store = db.createObjectStore('First', { keyPath:'chats'})
+              store.createIndex('helloIndex', 'hello')
             }
           });
           const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            console.log(store)
+            const arr = store.get('helloIndex')
+            console.log(arr)
             // if (!result) {
             //   await store.add(data);
             //   console.log('Data added successfully:', data);

@@ -63,23 +63,19 @@ const ChatHome = () => {
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
               const store = db.createObjectStore('First', { keyPath:'chats'})
-              store.createIndex('privateIdIndex', 'privateId');
             }
           });
           const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            const privateIdIndex = store.index('privateIdIndex');
-            console.log(privateIdIndex,5)
-            const result = await privateIdIndex.get(data.privateId);
-             console.log('Data found:', result);
-            if (!result) {
-              await store.add(data);
-              console.log('Data added successfully:', data);
-            } else {
-              console.log('Data with the same privateId already exists:', result);
-            }
+            console.log(store)
+            // if (!result) {
+            //   await store.add(data);
+            //   console.log('Data added successfully:', data);
+            // } else {
+            //   console.log('Data with the same privateId already exists:', result);
+            // }
             await tx.done
           }
 

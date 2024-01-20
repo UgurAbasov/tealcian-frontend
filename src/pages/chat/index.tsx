@@ -63,7 +63,7 @@ const ChatHome = () => {
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
               const store = db.createObjectStore('First', { keyPath:'chats'})
-              store.createIndex('helloIndex', 'hello')
+              store.createIndex('helloIndex', 'hello',  { unique: false })
             }
           });
           const addObjectToDatabase = async (data: any) => {
@@ -71,7 +71,10 @@ const ChatHome = () => {
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
             const arr = store.index('helloIndex')
-            console.log(arr)
+            const keyRange = IDBKeyRange.only(false);
+
+            const cursor = await arr.openCursor(keyRange);
+            console.log(cursor)
             // if (!result) {
             //   await store.add(data);
             //   console.log('Data added successfully:', data);

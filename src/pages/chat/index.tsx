@@ -62,20 +62,20 @@ const ChatHome = () => {
           const gotResult = JSON.parse(decrypted)
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
-              db.createObjectStore(`First`, { keyPath:'chats', autoIncrement: true })
+              db.createObjectStore('First', { keyPath:'chats', autoIncrement: true })
             }
           });
-          const addObjectToDatabase = async (data: any, index: any) => {
+          const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
-            const tx = db.transaction(`id${index}`, 'readwrite');
-            const store = tx.objectStore(`id${index}`);
+            const tx = db.transaction('First', 'readwrite');
+            const store = tx.objectStore('First');
             await store.add(data);
             await tx.done;
           };
 
           if (gotResult.length > 0) {
              gotResult.forEach((value: any, index: any) => {
-              addObjectToDatabase(value, index)
+              addObjectToDatabase(value)
             })
             setLoadingData(true)
             setAllChats(gotResult);

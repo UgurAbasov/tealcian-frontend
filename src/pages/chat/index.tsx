@@ -78,7 +78,7 @@ const ChatHome = () => {
               await store.add(data);
               console.log('Data added successfully:', data);
             } else {
-              console.log('Data with the same privateId already exists:', existingData);
+              console.log('Data with the same privateId already exists:', result);
             }
             await tx.done
           }

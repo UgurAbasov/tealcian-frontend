@@ -67,8 +67,8 @@ const ChatHome = () => {
           });
           const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
-            const tx = db.transaction('yourObjectStoreName', 'readwrite');
-            const store = tx.objectStore('yourObjectStoreName');
+            const tx = db.transaction('chats', 'readwrite');
+            const store = tx.objectStore('chats');
             await store.add(data);
             await tx.done;
           };

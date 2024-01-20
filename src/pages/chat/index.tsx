@@ -72,11 +72,11 @@ const ChatHome = () => {
             const store = tx.objectStore('First');
             const exist = await store.put(data)
             console.log(exist,1)
-            if(exist){
-              console.log(exist,2)
-            } else {
-              store.add(data)
-            }
+            // if(exist){
+            //   console.log(exist,2)
+            // } else {
+            //   store.add(data)
+            // }
             await tx.done
           }
 

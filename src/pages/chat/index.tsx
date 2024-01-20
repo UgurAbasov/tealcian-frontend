@@ -68,9 +68,9 @@ const ChatHome = () => {
           });
           const addObjectToDatabase = async (data: any) => {
             const db = dbPromise;
-            const tx = db.transaction('First', 'readwrite');
+            const tx = db.transaction('First', 'readwrite')
             const store = tx.objectStore('First');
-            const exist = store.index(data.privateId)
+            const exist = await store.get(data.privateId)
             console.log(exist,1)
             if(exist){
               console.log(exist,2)

@@ -70,7 +70,7 @@ const ChatHome = () => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            const arr = store.index('hello')
+            const arr = store.index('helloIndex')
             console.log(arr)
             // if (!result) {
             //   await store.add(data);

@@ -63,7 +63,7 @@ const ChatHome = () => {
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
               gotResult.forEach((value: any, index: any) => {
-                db.createObjectStore(`First`, { keyPath: `${index}`, autoIncrement: true })
+                db.createObjectStore(`First`, { keyPath:'id', autoIncrement: true })
               })
             }
           });

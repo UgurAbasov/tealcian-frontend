@@ -70,14 +70,14 @@ const ChatHome = () => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            const exist = await store.get(data.privateId)
+            const exist = await store.get(data)
             console.log(exist,1)
             if(exist){
               console.log(exist,2)
             } else {
               store.add(data)
             }
-            await tx.done;
+            await tx.done
           }
 
           if (gotResult.length > 0) {

@@ -70,11 +70,13 @@ const ChatHome = () => {
             const db = dbPromise;
             const tx = db.transaction('First', 'readwrite');
             const store = tx.objectStore('First');
-            const existingData = await store.get(data.privateId);
-            if(!existingData){
+            const index = store.index('privateId'); // Assuming 'privateId' is a property in your object
+            const existingData = await index.get(data.privateId);
+            if (!existingData) {
               await store.add(data);
+              console.log('Data added successfully:', data);
             } else {
-              console.log('not',existingData)
+              console.log('Data with the same privateId already exists:', existingData);
             }
             await tx.done
           }

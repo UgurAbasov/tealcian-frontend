@@ -62,8 +62,8 @@ const ChatHome = () => {
           const gotResult = JSON.parse(decrypted)
           const dbPromise = await openDB('chats', 1, {
             upgrade(db) {
-              gotResult.forEach((value: any) => {
-                db.createObjectStore(`First`, { keyPath: '5', autoIncrement: true })
+              gotResult.forEach((value: any, index: any) => {
+                db.createObjectStore(`First`, { keyPath: `${index}`, autoIncrement: true })
               })
             }
           });
@@ -71,7 +71,7 @@ const ChatHome = () => {
             const db = dbPromise;
             const tx = db.transaction('yourObjectStoreName', 'readwrite');
             const store = tx.objectStore('yourObjectStoreName');
-            await store.put(data);
+            await store.add(data);
             await tx.done;
           };
 

@@ -29,7 +29,6 @@ const ErrorModel = (props: any) => {
         </div>
     </div>
 </div>
-
         )
     }
 

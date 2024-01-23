@@ -44,7 +44,7 @@ const Profile = () => {
         </div>
       )}
         </div>
-        <h1 className=" text-2xl mt-auto mb-auto ml-auto mr-2">Ugur Abbasov</h1>
+        <h1 className=" text-2xl mt-auto mb-auto ml-auto mr-2 overflow-hidden">Ugur Abbasov</h1>
     </div>
     </div>
     )

@@ -14,19 +14,14 @@ const ContextMenu = (props: any) => {
         if (!menuElement) {
           return;
         }
-    
         const { clientWidth, clientHeight } = menuElement;
         const { innerWidth, innerHeight } = window;
-        
-        // Adjust left position if the menu goes beyond the right edge
         if (props.position.x + clientWidth > innerWidth) {
           menuElement.style.left = `${innerWidth - clientWidth}px`;
         } else {
           menuElement.style.left = `${props.position.x}px`;
         }
-    
-        // Adjust top position if the menu goes beyond the bottom edge
-        if (props.position.y + clientHeight > innerHeight) {
+            if (props.position.y + clientHeight > innerHeight) {
           menuElement.style.top = `${innerHeight - clientHeight}px`;
         } else {
           menuElement.style.top = `${props.position.y}px`;

@@ -50,7 +50,7 @@ const Chat = (props: any) => {
 
   useEffect(() => {
     setMassages([]);
-  }, [props.data.privateId]);
+  }, [props.data.privateId])
 
   useEffect(() => {
     if (scrollableDivRef.current) {
@@ -74,7 +74,7 @@ const Chat = (props: any) => {
           body: JSON.stringify({
             roomId: props.data.privateId,
             refreshToken: localStorage.getItem('refreshToken'),
-          }),
+          })
         }
       );
       const data = response.json();
@@ -99,7 +99,8 @@ const Chat = (props: any) => {
     })
     props.socket.on('receiveMessage', (data: any) => {
       let Data = data.toString('utf8')
-      let result = JSON.parse(Data)
+      console.log(data)
+      let result = JSON.parse("{ff}")
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];
         const newObj = {

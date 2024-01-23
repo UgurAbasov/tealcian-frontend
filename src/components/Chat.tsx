@@ -99,7 +99,7 @@ const Chat = (props: any) => {
     })
     props.socket.on('receiveMessage', (data: any) => {
       let Data = data.toString('utf8')
-      console.log(data)
+      console.log(Data)
       let result = JSON.parse("{ff}")
       setMassages(prevMassages => {
         const updatedData = [...prevMassages];

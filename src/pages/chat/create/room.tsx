@@ -84,7 +84,7 @@ const CreateRoom = () => {
                 isServerError: false
             })
         } else {
-        const response = await fetch('https://tealcian-backend-production-3d2b.up.railway.app/chat/room', {
+        const response = await fetch(`${process.env.BACKEND_URL}/chat/room`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

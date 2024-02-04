@@ -3,7 +3,6 @@ import MassageModel from './MassageModel';
 import getCurrentDate from '@/utils/formatTime';
 import ContextMenu from './ContextMenu';
 import { createDecipher } from 'crypto';
-import socketIoParser from 'socket.io-parser'
 
 interface YourStateType {
   time: string;
@@ -30,13 +29,15 @@ const Chat = (props: any) => {
     setSelectedMessageIndex(msgIndex);
     setContextMenuPosition({ x: event.clientX, y: event.clientY });
     setContextMenuVisible(true);
-  };
+  }
 
   const deleteMessage = () => {
       const update: YourStateArrayType = [...massages]
       console.log(update[0])
       console.log(update[0].data[selectedMessageIndex])
-      props.socket.emit('deleteMessage', {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))})
+      const resultObj = {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))}
+      var buffer = new TextEncoder().encode(JSON.stringify(resultObj));
+      props.socket.emit('deleteMessage',buffer)
   }
 
 
@@ -64,7 +65,7 @@ const Chat = (props: any) => {
   useEffect(() => {
     const fetching = async () => {
       const response = await fetch(
-        'https://tealcian-backend-production-3d2b.up.railway.app/chat/getMessages',
+        `${process.env.BACKEND_URL}/chat/getMessages`,
         {
           method: 'POST',
           headers: {
@@ -76,7 +77,7 @@ const Chat = (props: any) => {
             refreshToken: localStorage.getItem('refreshToken'),
           })
         }
-      );
+      )
       const data = response.json();
       data.then(result => {
         const key = process.env.BASE_URL
@@ -89,20 +90,21 @@ const Chat = (props: any) => {
       });
     };
     fetching();
-  }, [props.data.privateId]);
+  }, [props.data.privateId])
+
+
 
   useEffect(() => {
     props.socket.on('deleteMessage', (data: any) => {
-      let Data = data.toString('utf8')
+      let Data = new TextDecoder().decode(data);
       let result = JSON.parse(Data)
       setMassages(result.arrayResult)
     })
     props.socket.on('receiveMessage', (data: any) => {
-      let Data = new TextDecoder().decode(data);
-      console.log(Data)
+      let Data = new TextDecoder().decode(data)
       let result = JSON.parse(Data)
       setMassages(prevMassages => {
-        const updatedData = [...prevMassages];
+        const updatedData = [...prevMassages]
         const newObj = {
           body: result.body,
           own: result.own,
@@ -139,7 +141,7 @@ const Chat = (props: any) => {
     if (event.key === 'Enter') {
       addMassage();
     }
-  };
+  }
 
   useEffect(() => {
     localStorage.setItem('isChannel', 'true');
@@ -147,16 +149,21 @@ const Chat = (props: any) => {
 
   const addMassage = () => {
     if (inputValue.length > 0) {
-      props.socket.emit('addMessage', {
+      props.onChangable(inputValue)
+      const resultObj = {
         targetId: props.data.privateId,
         refreshToken: localStorage.getItem('refreshToken'),
         message: inputValue,
         targetType: 'private',
-      })
-      props.socket.emit('sendNotification', { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue });
-      setInputValue('');
+      }
+      var buffer = new TextEncoder().encode(JSON.stringify(resultObj))                                                                                             
+      const resultObj1 = { roomId: props.data.privateId, refreshToken: localStorage.getItem('refreshToken'), message: inputValue }
+      var buffer1 = new TextEncoder().encode(JSON.stringify(resultObj1));
+      props.socket.emit('addMessage', buffer)
+      props.socket.emit('sendNotification', buffer1);
+      setInputValue('')
     }
-  };
+  }
 
   return (
     <div onClick={handleCloseContextMenu} className='chat flex flex-col  h-screen'>

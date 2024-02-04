@@ -32,7 +32,7 @@ const SignUp = () => {
       if (validationResponse.massage === 'good') {
         setButtonLoading(type);
         const response = await fetch(
-          `https://tealcian-backend-production-3d2b.up.railway.app/auth/sign`,
+          `${process.env.BACKEND_URL}/auth/sign`,
           {
             method: 'POST',
             headers: {
@@ -68,7 +68,7 @@ const SignUp = () => {
       }
     } else {
       setButtonLoading(type);
-      router.push(`https://tealcian-backend-production-3d2b.up.railway.app/auth/${type}-redirect`);
+      router.push(`${process.env.BACKEND_URL}/auth/${type}-redirect`);
     }
   };
 

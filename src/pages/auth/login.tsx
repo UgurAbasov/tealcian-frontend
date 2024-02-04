@@ -30,7 +30,7 @@ const Login = () => {
             const validationResponse = isValidate(value)
             if (validationResponse.massage === 'good') {
                 setButtonLoading(type)
-                const response = await fetch(`https://tealcian-backend-production-3d2b.up.railway.app/auth/login`, {
+                const response = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const Login = () => {
             }
         } else {
             setButtonLoading(type)
-            router.push(`https://tealcian-backend-production-3d2b.up.railway.app/auth/${type}-redirect`)
+            router.push(`${process.env.BACKEND_URL}/auth/${type}-redirect`)
         }
     }
 

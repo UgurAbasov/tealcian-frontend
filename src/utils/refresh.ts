@@ -1,5 +1,5 @@
 const refresh = async (refreshToken: any) => {
-    const response = await fetch('https://tealcian-backend-production-3d2b.up.railway.app/auth/refresh', {
+    const response = await fetch(`${process.env.BACKEND_URL}/auth/refresh`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

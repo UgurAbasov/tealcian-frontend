@@ -24,7 +24,7 @@ const CreateRoom = () => {
        if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)){
         const refreshToken = localStorage.getItem('refreshToken')
         setButtonLoading(true)
-        const response = await fetch('https://tealcian-backend-production-3d2b.up.railway.app/chat/private', {
+        const response = await fetch(`${process.env.BACKEND_URL}/chat/private`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

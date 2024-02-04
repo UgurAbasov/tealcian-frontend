@@ -7,27 +7,25 @@ import UserSkeleton from '@/components/UserSkeleton';
 import Chat from '@/components/Chat';
 import { io } from 'socket.io-client';
 import { createDecipher } from 'crypto';
-import {openDB} from 'idb'
-const socket = io('https://tealcian-backend-production.up.railway.app')
+const socket = io(`${process.env.BACKEND_URL}`)
 
 const ChatHome = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const router = useRouter()
   const [allChats, setAllChats] = useState<any>();
   const [loadingData, setLoadingData] = useState(false);
   const [noUser, setNoUsers] = useState(true);
   const [currentData, setCurrentData] = useState();
   const [notification, setNotification] = useState<any>([])
   const [readyForData, setReadyForData] = useState(false)
+  const [chatInputValue, setChatInputValue] = useState('')
   const getChatData = (index: any) => {
     setCurrentData(allChats[index]);
   };
 
   useEffect(() => {
     localStorage.removeItem('isChannel');
-    async function useDB() {
-    }
     async function fetching() {
       const data = await checkAuth().then(result => {
         if (result === 0) {
@@ -41,7 +39,7 @@ const ChatHome = () => {
     async function getPrivates() {
       const refreshToken = localStorage.getItem('refreshToken');
       const response = await fetch(
-        'https://tealcian-backend-production-3d2b.up.railway.app/chat/getPrivates',
+        `${process.env.BACKEND_URL}/chat/getPrivates`,
         {
           method: 'POST',
           headers: {
@@ -58,7 +56,7 @@ const ChatHome = () => {
           const algorithm = 'aes-256-cbc'
           const decipher = createDecipher(algorithm, key || '');
           let decrypted = decipher.update(result.objectArr, 'hex', 'utf8');
-          decrypted += decipher.final('utf8');
+          decrypted += decipher.final('utf8')
           const gotResult = JSON.parse(decrypted)
 
           if (gotResult.length > 0) {
@@ -88,7 +86,8 @@ const ChatHome = () => {
   useEffect(() => {
     if(readyForData){
         for(let i = 0; i < allChats.length; i++){
-            socket.emit('joinToAll', { targetId: allChats[i].privateId, userId: localStorage.getItem('userId')});
+          let buffer = new TextEncoder().encode(JSON.stringify({ targetId: allChats[i].privateId, userId: localStorage.getItem('userId')}));
+            socket.emit('joinToAll', buffer);
         }
     }
   }, [readyForData])
@@ -107,7 +106,7 @@ const ChatHome = () => {
   
   useEffect(() => {
     socket.on('sendNotification', data => {
-      let Data = data.toString('utf8')
+      let Data = new TextDecoder().decode(data);
       let result = JSON.parse(Data)
           if (localStorage.getItem('isChannel') !== 'true') {
         if (result.userId.toString() !== localStorage.getItem('userId')){
@@ -118,12 +117,12 @@ const ChatHome = () => {
                 }) 
             }
             setNotification((prevState: any) => {
-                console.log(prevState, 1)
                 const update = [...prevState]
                 const index = update.findIndex((item) => item.privateId === result.privateId)
+                socket.emit("sendNotification", {refreshToken: localStorage.getItem('refreshToken'), message: chatInputValue, roomId: update[index].privateId})
                 update[index] = {privateId: update[index].privateId, state: update[index].state + 1}
                 return update
-              });
+              })
         } else {
           console.log('else');
           }
@@ -131,6 +130,12 @@ const ChatHome = () => {
     })
 
   }, [socket])
+
+  const onChangable = (value: any) => {
+    setChatInputValue(value)
+  }
+
+
 
   return (
     <>
@@ -263,7 +268,7 @@ const ChatHome = () => {
             )}
           </div>
           <div className='second w-[70%]'>
-            {currentData ? <Chat data={currentData} socket={socket} /> : <p>Click to users</p>}
+            {currentData ? <Chat data={currentData} socket={socket} onChangable={onChangable} /> : <p>Click to users</p>}
           </div>
         </div>
       )}

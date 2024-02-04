@@ -33,8 +33,8 @@ const Chat = (props: any) => {
 
   const deleteMessage = () => {
       const update: YourStateArrayType = [...massages]
-      console.log(update[0])
-      console.log(update[0].data[selectedMessageIndex])
+      console.log(selectedMessageIndex,1)
+      console.log(update[0].data[selectedMessageIndex],2)
       const resultObj = {time: update[0].data[selectedMessageIndex].time, message: update[0].data[selectedMessageIndex].body, privateId: props.data.privateId, userId: Number(localStorage.getItem('userId'))}
       var buffer = new TextEncoder().encode(JSON.stringify(resultObj));
       props.socket.emit('deleteMessage',buffer)

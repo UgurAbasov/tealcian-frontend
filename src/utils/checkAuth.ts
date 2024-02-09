@@ -1,27 +1,41 @@
-import getUser from "./getUser"
-import refresh from "./refresh"
-const checkAuth = async () => {
-  const refreshToken = localStorage.getItem('refreshToken')
-  const accessToken = localStorage.getItem('accessToken')
-  if (!refreshToken || !accessToken) {
-    localStorage.removeItem('refreshToken')
-    localStorage.removeItem('accessToken')
-    return 0
-  }
-  const accessResponse = await getUser(accessToken)
-  if (accessResponse.id) {
-    localStorage.setItem('userId', accessResponse.id);
-    return 1
-  } else {
-    const refreshResponse = await refresh(refreshToken)
-    if (refreshResponse.accessToken) {
-      localStorage.setItem('accessToken', refreshResponse.accessToken)
-      return 1
-    } else {
-      return 0
-    }
-  }
+import { getToken } from '@/hooks/getToken';
+import { refreshAccessToken } from '@/shared/localStorage/refreshAccessToken';
+import { setAccessTokenInLocalStorage } from '@/shared/localStorage/setAccessTokenInLocalStorage';
+import { setUserIdInLocalStorage } from '@/shared/localStorage/setUserIdInLocalStorage';
+import { clearLocalStorage } from '@/utils/localStorage/clearLocalStorage';
+import { getUserData } from '@/utils/user/getUserData';
+
+export const enum ERROR_CODE {
+  SUCCESS = 1,
+  FAILURE = 0,
 }
 
+const checkAuth = async () => {
+  try {
+    const { accessToken, refreshToken } = getToken();
 
-export default checkAuth
+    if (!refreshToken || !accessToken) {
+      clearLocalStorage();
+      return ERROR_CODE.FAILURE;
+    }
+
+    const accessResponse = await getUserData();
+    if (accessResponse.id) {
+      setUserIdInLocalStorage(accessResponse.id);
+      return ERROR_CODE.SUCCESS;
+    } else {
+      const refreshResponse = await refreshAccessToken(refreshToken);
+      if (refreshResponse.accessToken) {
+        setAccessTokenInLocalStorage(refreshResponse.accessToken);
+        return ERROR_CODE.SUCCESS;
+      } else {
+        return ERROR_CODE.FAILURE;
+      }
+    }
+  } catch (error) {
+    console.error('An error occurred during authentication:', error);
+    return ERROR_CODE.FAILURE;
+  }
+};
+
+export default checkAuth;

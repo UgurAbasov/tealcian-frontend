@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  poweredByHeader: false,
   env: {
     BASE_URL: process.env.NEXT_PUBLIC_KEY,
-    BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND
-  }
-}
+    BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND,
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import Head from 'next/head';
 
-import logoImage from '@/assets/images/favicon.svg';
+// import logoImage from '@/assets/images/favicon.svg';
 import { onlyText } from '@/utils/string/clearText';
 import { siteName, titleMerge } from '@/shared/config/seo/seo.config';
 import { usePathname } from 'next/navigation';
@@ -22,7 +22,7 @@ const Meta: FC<ISeo> = ({ title, description, image, children }) => {
             <meta property='og:locale' content='en' />
             <meta property='og:title' content={titleMerge(title)} />
             <meta property='og:url' content={currentUrl} />
-            <meta property='og:image' content={image || logoImage} />
+            <meta property='og:image' content={image || 'logoImage'} />
             <meta property='og:site_name' content={siteName} />
             <meta property='og:description' content={onlyText(description, 197)} />
           </>

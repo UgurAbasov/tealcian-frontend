@@ -1,0 +1,52 @@
+.auth {
+	@apply p-5 h-screen max-w-[1600px] mx-auto grid grid-cols-2 items-center;
+}
+
+.info {
+	@apply flex flex-col max-w-[450px];
+
+	> img {
+		@apply mb-[115px];
+	}
+
+	> .info-content {
+		@apply text-center;
+
+		> h2 {
+			@apply mb-14 font-bold text-2xl text-black;
+		}
+	}
+}
+
+.pick {
+	@apply mb-8 relative;
+	&::after {
+		content: '';
+		@apply absolute top-[53%] right-[7%] h-[1px] w-[170px] bg-[#ececec];
+	}
+
+	&::before {
+		content: '';
+		@apply absolute top-[53%] left-[7%] h-[1px] w-[170px] bg-[#ececec];
+	}
+}
+
+.info-content-auth {
+	@apply mb-[50px] text-sm font-medium text-black;
+
+	> a {
+		@apply text-[#215fad];
+	}
+}
+
+.info-content-text {
+	@apply whitespace-nowrap font-normal text-xs text-[#dadcde];
+
+	> span {
+		@apply text-black;
+	}
+}
+
+.background-image {
+	@apply w-full pointer-events-none max-h-[800px] flex justify-center items-center;
+}

@@ -1,0 +1,38 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	font: inherit;
+}
+
+button,
+select {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+button,
+select,
+textarea,
+input {
+	font: inherit;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}

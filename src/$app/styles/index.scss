@@ -11,3 +11,9 @@ body {
 		font-size: 14px;
 	}
 }
+
+.center {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+}

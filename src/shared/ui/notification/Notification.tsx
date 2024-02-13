@@ -2,6 +2,8 @@ import { FC } from 'react'
 
 import styles from './Notification.module.scss'
 
+import { classNames } from '@/shared/lib/classNames/classNames'
+
 export const enum NotificationType {
 	SUCCESS = 'success',
 	ERROR = 'error',
@@ -13,8 +15,9 @@ interface INotificationProps {
 	text: string
 }
 
-const Notification: FC<INotificationProps> = ({ type = NotificationType.WARNING, text }) => {
-	return <div className={`${styles.alert} ${styles[type]}`}>{text}</div>
+const Notification: FC<INotificationProps> = ({ type = NotificationType.SUCCESS, text }) => {
+	return <div className={classNames(styles.alert, {}, [styles[type]])}>{text}</div>
 }
 
 export default Notification
+

@@ -1,6 +1,5 @@
 'use client'
 
-import QueryProvider from './QueryProvider'
 import { FC, ReactNode } from 'react'
 
 interface IMainProviderProps {
@@ -8,7 +7,7 @@ interface IMainProviderProps {
 }
 
 const MainProvider: FC<IMainProviderProps> = ({ children }) => {
-	return <QueryProvider>{children}</QueryProvider>
+	return <>{children}</>
 }
 
 export default MainProvider

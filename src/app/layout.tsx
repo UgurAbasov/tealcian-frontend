@@ -5,6 +5,8 @@ import { SITE_NAME } from '@/shared/constants/seo.constants'
 import MainProvider from '@/$app/providers/MainProvider'
 
 import '@/$app/styles/index.scss'
+import { onlyText } from '@/shared/utils/onlyText'
+import { currentDescription } from '@/shared/config/currentDescription'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +16,15 @@ export const metadata: Metadata = {
 		template: `${SITE_NAME} | %s`,
 	},
 	description: `${SITE_NAME} - the best social network for programmers and developers`,
+	openGraph: {
+		title: `${SITE_NAME} | %s`,
+		locale: 'en',
+		siteName: SITE_NAME,
+		description: onlyText(
+			currentDescription(`${SITE_NAME} - the best social network for programmers and developers`),
+			197,
+		),
+	},
 }
 
 export default function RootLayout({

@@ -1,0 +1,11 @@
+.not-found {
+	@apply min-h-screen flex justify-center items-center flex-col font-bold bg-black text-white text-4xl;
+
+	span {
+		@apply mb-7;
+	}
+
+	button {
+		@apply text-2xl px-3 py-2 rounded-xl border border-slate-200 border-solid;
+	}
+}

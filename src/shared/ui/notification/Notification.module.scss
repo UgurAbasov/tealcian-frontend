@@ -1,4 +1,4 @@
-@import '@/assets/styles/animations/_animations.scss';
+@import '../../../$app/styles/animations/_animations.scss';
 
 .alert {
 	@apply font-bold p-6 w-fit h-8 rounded-lg flex justify-center items-center absolute z-10 right-5 bottom-5 shadow-lg;

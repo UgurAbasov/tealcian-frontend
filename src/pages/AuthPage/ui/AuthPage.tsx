@@ -1,29 +1,20 @@
 'use client'
 
-import Notification from '@/components/ui/notification/Notification'
-import { AuthService } from '@/services/auth.service'
-import { APPLICATION_PAGES } from '@/shared/config/pages-url.config'
-import { IAuthForm } from '@/shared/types/auth.type'
-import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 import { FC, useState } from 'react'
-import styles from './Auth.module.scss'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import FormsContainer from '@/components/ui/formsContainer/FormsContainer'
+
+import FormsContainer from '@/widgets/formsContainer/FormsContainer'
+
+import Notification from '@/shared/ui/notification/Notification'
+
+import styles from './AuthPage.module.scss'
 
 const Auth: FC = () => {
 	const [isLoginForm, setIsLoginForm] = useState<boolean>(false)
 
 	const { push } = useRouter()
-
-	const { mutate, isSuccess } = useMutation({
-		mutationKey: ['auth'],
-		mutationFn: (data: IAuthForm) => AuthService.main(isLoginForm ? 'auth' : 'register', data),
-		onSuccess() {
-			push(APPLICATION_PAGES.HOME)
-		},
-	})
 
 	return (
 		<div className={styles.auth}>
@@ -56,7 +47,7 @@ const Auth: FC = () => {
 					alt="bgImage"
 				/>
 			</div>
-			{true && <Notification text="Успешная авторизация!" />}
+			{true && <Notification text="Authorization successful!" />}
 		</div>
 	)
 }
